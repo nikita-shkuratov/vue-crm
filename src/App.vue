@@ -1,7 +1,23 @@
 <template>
-  <router-view/>
+  <component :is="layout + '-layout'" v-if="layout" />
 </template>
 
-<style lang="scss">
+<script>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import AuthLayout from './layout/Auth.layout'
+import MainLayout from './layout/Main.layout'
 
-</style>
+export default {
+  setup () {
+    const route = useRoute()
+    return {
+      layout: computed(() => route.meta.layout)
+    }
+  },
+  components: {
+    AuthLayout,
+    MainLayout
+  }
+}
+</script>
