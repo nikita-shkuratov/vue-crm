@@ -33,7 +33,9 @@
       </div>
       <div class="footer-wrapper">
         <div class="info-text">Lorem ipsum dolor sit amet consectetur.</div>
-        <button class="button" type="submit" :disabled="isSubmitting">Enter</button>
+        <button class="button" type="submit" :disabled="isSubmitting">
+          Enter
+        </button>
       </div>
     </div>
   </form>
@@ -145,9 +147,14 @@ export default {
         width: 218px;
         height: 48px;
         color: #ffffff;
+        &:focus {
+          outline: none;
+          border: 1px solid #ffffff;
+          box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
+        }
       }
-      .info-text {
-      }
+      /* .info-text {
+      } */
     }
   }
 }

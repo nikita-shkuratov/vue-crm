@@ -13,14 +13,27 @@
         <router-link to="/message">Messages</router-link>
       </li>
       <li>
-       <router-link to="/exit">Exit</router-link>
+        <router-link to="/auth" @click.prevent="logout">Exit</router-link>
       </li>
     </ul>
   </nav>
 </template>
 
 <script>
-export default {}
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+export default {
+  setup () {
+    const router = useRouter()
+    const store = useStore()
+    return {
+      logout: () => {
+        store.commit('auth/logout')
+        router.push('/auth')
+      }
+    }
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -35,30 +48,29 @@ export default {}
   align-items: center;
 
   h3 {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  color: #ffffff;
-  margin: 0;
-}
-ul {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-li {
-  list-style: none;
-  margin-left: 15px;
-  a {
-    text-decoration: none;
     font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 20px;
     line-height: 20px;
     color: #ffffff;
+    margin: 0;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  li {
+    list-style: none;
+    margin-left: 15px;
+    a {
+      text-decoration: none;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #ffffff;
+    }
   }
 }
-}
-
 </style>
