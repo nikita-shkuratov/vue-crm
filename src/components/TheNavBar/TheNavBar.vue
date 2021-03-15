@@ -4,16 +4,16 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/">Requests</router-link>
+        <router-link to="/auth">Requests</router-link>
       </li>
       <li>
-        <router-link to="/">Help</router-link>
+        <router-link to="/help">Help</router-link>
       </li>
       <li>
-        <router-link to="/">Messages</router-link>
+        <router-link to="/message">Messages</router-link>
       </li>
       <li>
-        <a to="#">Exit</a>
+       <router-link to="/exit">Exit</router-link>
       </li>
     </ul>
   </nav>
@@ -25,16 +25,16 @@ export default {}
 
 <style scoped lang="scss">
 .navbar {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   background: linear-gradient(178.57deg, #25af86 0%, #7cd46f 100%);
   box-shadow: 0px 4px 26px rgba(93, 182, 120, 0.5);
-  border-radius: 22px;
+  border-radius: 0px 25px 0px 25px;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-h3 {
+
+  h3 {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -59,4 +59,6 @@ li {
     color: #ffffff;
   }
 }
+}
+
 </style>
