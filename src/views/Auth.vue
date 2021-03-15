@@ -33,7 +33,11 @@
       </div>
       <div class="footer-wrapper">
         <div class="info-text">Lorem ipsum dolor sit amet consectetur.</div>
-        <button class="button" type="submit" :disabled="isSubmitting">
+        <button
+          class="button"
+          type="submit"
+          :disabled="isSubmitting || isTooManyAttempts"
+        >
           Enter
         </button>
       </div>
@@ -42,10 +46,21 @@
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 import { useLogin } from '../helpers/login.form'
+import { error } from '../helpers/error'
 
 export default {
   setup () {
+    const route = useRoute()
+    const store = useStore()
+    if (route.query.message) {
+      store.dispatch('setMessage', {
+        value: error(route.query.message),
+        type: 'danger'
+      })
+    }
     return { ...useLogin() }
   }
 }
@@ -151,6 +166,9 @@ export default {
           outline: none;
           border: 1px solid #ffffff;
           box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
+        }
+        &[disabled] {
+          background: linear-gradient(180deg, #6a6d6c 0%, #9b9c9b 100%);
         }
       }
       /* .info-text {

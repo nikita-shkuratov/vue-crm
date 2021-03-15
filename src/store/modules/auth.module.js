@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { error } from '../../helpers/error'
+
 export default {
   namespaced: true,
   state () {
@@ -14,10 +17,27 @@ export default {
     }
   },
   actions: {
-    async login ({ commit }, payload) {
-      commit('setToken', 'TEST-TOKEN')
+    async login ({ commit, dispatch }, payload) {
+      try {
+        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`
+        console.log(url)
+        const { data } = await axios.post(url, payload)
+        commit('setToken', data.idToken)
+        commit('clearMessage', null, { root: true })
+      } catch (e) {
+        dispatch(
+          'setMessage',
+          {
+            value: error(e.response.data.error.message),
+            type: 'danger'
+          },
+          { root: true }
+        )
+        throw new Error()
+      }
     }
   },
+
   getters: {
     token (state) {
       return state.token

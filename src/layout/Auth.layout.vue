@@ -1,12 +1,18 @@
 <template>
   <div class="wrapper">
-    <router-view/>
+    <router-view />
+    <app-message></app-message>
   </div>
 </template>
 
-<script></script>
+<script>
+import AppMessage from '../components/ui/appMessage'
+export default {
+  components: { AppMessage }
+}
+</script>
 <style lang="scss" scoped>
-.wrapper{
+.wrapper {
   width: 100vw;
   height: 100vh;
   display: flex;
