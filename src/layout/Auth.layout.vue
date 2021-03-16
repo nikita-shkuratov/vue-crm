@@ -1,8 +1,23 @@
 <template>
-  <div class="container">
-    <div class="card">qwe</div>
+  <div class="wrapper">
+    <router-view />
+    <app-message></app-message>
   </div>
 </template>
 
-<script></script>
-<style scoped></style>
+<script>
+import AppMessage from '../components/ui/appMessage'
+export default {
+  components: { AppMessage }
+}
+</script>
+<style lang="scss" scoped>
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+</style>
