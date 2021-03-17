@@ -1,23 +1,15 @@
 <template>
-  <div class="overlay" @click="$emit('close')">
+  <div class="overlay">
     <div class="modalWindow">
-     <div className="container">
-      <h3 v-if="title">{{ title }}</h3>
-      <h2>test</h2>
+      <div class="close-modal" @click="$emit('close')"></div>
       <slot />
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  emits: ['close'],
-  props: {
-    title: {
-      type: String
-    }
-  }
+  emits: ['close']
 }
 </script>
 
@@ -44,8 +36,9 @@ export default {
   box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: 8px;
+  position: relative;
 }
-.container{
+.container {
   box-sizing: border-box;
   width: 500px;
   height: 500px;
@@ -53,5 +46,14 @@ export default {
   border-radius: 20px;
   padding: 50px;
   position: relative;
+}
+.close-modal {
+  background-image: url('../../assets/ico/close-ico.svg');
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
 }
 </style>

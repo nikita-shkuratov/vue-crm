@@ -12,15 +12,16 @@ const routes = [
       auth: true
     }
   },
-  /* {
+  {
     path: '/reguest',
     name: 'Requests',
-    component: () => import(''),
+    component: () => import('../views/Request.vue'),
     meta: {
       layout: 'main',
       auth: true
     }
   },
+  /*
   {
     path: '/help',
     name: 'Help',
