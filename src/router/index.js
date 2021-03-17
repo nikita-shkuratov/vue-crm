@@ -12,15 +12,33 @@ const routes = [
       auth: true
     }
   },
-  {
-    path: '/help',
-    name: 'Help',
-    component: () => import('../views/Help.vue'),
+  /* {
+    path: '/reguest',
+    name: 'Requests',
+    component: () => import(''),
     meta: {
       layout: 'main',
       auth: true
     }
   },
+  {
+    path: '/help',
+    name: 'Help',
+    component: () => import(''),
+    meta: {
+      layout: 'main',
+      auth: true
+    }
+  },
+  {
+    path: '/message',
+    name: 'Message',
+    component: () => import(''),
+    meta: {
+      layout: 'main',
+      auth: true
+    }
+  }, */
   {
     path: '/auth',
     name: 'Auth',
@@ -34,7 +52,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
 })
 
 router.beforeEach((to, from, next) => {

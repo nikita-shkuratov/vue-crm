@@ -1,16 +1,15 @@
 <template>
-  <div class="main-layout">
-    <h1>help</h1>
+  <div class="pages">
+    <slot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Help'
 }
 </script>
 
 <style scoped>
-.main-layout {
+.pages {
 }
 </style>

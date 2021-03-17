@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppMessage from '../components/ui/appMessage'
+import AppMessage from '../components/ui/AppMessage'
 export default {
   components: { AppMessage }
 }
