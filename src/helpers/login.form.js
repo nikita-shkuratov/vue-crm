@@ -27,7 +27,7 @@ export const useLogin = () => {
 
   const onSubmit = handleSubmit(async values => {
     try {
-      await store.dispatch('auth/login', values)
+      await store.dispatch('auth/login', { ...values, returnSecureToken: true })
       router.push('/')
     } catch (e) {
       console.log(e)

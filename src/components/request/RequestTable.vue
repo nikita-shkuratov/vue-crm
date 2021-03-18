@@ -13,13 +13,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
+        <tr v-for="(r, idx) in requests" :key="r.id">
+          <td>{{ idx + 1 }}</td>
+          <td>{{ r.name }}</td>
+          <td>{{ r.phone }}</td>
+          <td>{{ r.amount }}</td>
+          <td>{{ r.status }}</td>
+          <td>
+            <router-link
+              v-slot="{ navigate }"
+              custom
+              :to="{ name: 'Request', params: { id: r.id } }"
+            >
+              <button class="button" @click="navigate">Open</button>
+            </router-link>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -32,6 +40,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

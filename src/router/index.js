@@ -18,7 +18,7 @@ const routes = [
     component: () => import('../views/Request.vue'),
     meta: {
       layout: 'main',
-      auth: true
+      auth: false
     }
   },
   /*

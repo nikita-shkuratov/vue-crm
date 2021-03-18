@@ -1,16 +1,19 @@
 <template>
   <the-nav-bar></the-nav-bar>
   <div class="container">
+    <app-message></app-message>
     <router-view />
   </div>
 </template>
 
 <script>
 import TheNavBar from '../components/TheNavBar/TheNavBar'
+import AppMessage from '../components/ui/AppMessage.vue'
 export default {
-  components: { TheNavBar }
+  components: { TheNavBar, AppMessage }
 }
 </script>
+
 <style lang="scss" scoped>
 .container {
   margin-top: 30px;
