@@ -5,11 +5,11 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>name</th>
-          <th>phone</th>
-          <th>summ</th>
-          <th>status</th>
-          <th>action</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Summ</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -17,8 +17,8 @@
           <td>{{ idx + 1 }}</td>
           <td>{{ r.name }}</td>
           <td>{{ r.phone }}</td>
-          <td>{{ r.amount }}</td>
-          <td>{{ r.status }}</td>
+          <td>{{ currency(r.amount) }}</td>
+          <td><app-status :type="r.status" /></td>
           <td>
             <router-link
               v-slot="{ navigate }"
@@ -35,8 +35,14 @@
 </template>
 
 <script>
+import { currency } from '../../helpers/currency'
+import AppStatus from '../ui/AppStatus.vue'
 export default {
-  props: ['requests']
+  components: { AppStatus },
+  props: ['requests'],
+  setup () {
+    return { currency }
+  }
 }
 </script>
 
