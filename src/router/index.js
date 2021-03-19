@@ -13,12 +13,12 @@ const routes = [
     }
   },
   {
-    path: '/reguest',
+    path: '/reguest/:id',
     name: 'Requests',
     component: () => import('../views/Request.vue'),
     meta: {
       layout: 'main',
-      auth: false
+      auth: true
     }
   },
   /*

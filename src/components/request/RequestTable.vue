@@ -23,7 +23,7 @@
             <router-link
               v-slot="{ navigate }"
               custom
-              :to="{ name: 'Request', params: { id: r.id } }"
+              :to="`/reguest/${r.id}`"
             >
               <button class="button" @click="navigate">Open</button>
             </router-link>

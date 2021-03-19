@@ -1,62 +1,40 @@
 <template>
   <app-loader v-if="loading" />
-  <div v-else>
-    <button @click="modal = true">create</button>
-    <request-filter v-model="filter"></request-filter>
-    <request-table :requests="requests || []"></request-table>
-    <teleport to="body">
-      <app-modal v-if="modal" @close="modal = false"
-        ><reques-modal @created="modal = false" />
-      </app-modal>
-    </teleport>
-  </div>
+  <app-page v-else-if="request" back>
+   <p><strong>Name</strong>:{{request.name}}</p>
+   <p><strong>Phone</strong>:{{request.phone}}</p>
+   <p><strong>Amount</strong>:{{currency(request.amount)}}</p>
+   <p><strong>Status</strong>:<app-status :type="request.status" /></p>
+  </app-page>
+<h3 v-else>{{`request with id:${route.params.id} not found`}}</h3>
+
 </template>
 
 <script>
-import { ref, computed, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import AppPage from '../components/ui/AppPage.vue'
+import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import AppModal from '../components/ui/AppModal.vue'
-import RequestTable from '../components/request/RequestTable.vue'
-import RequesModal from '../components/request/RequesModal.vue'
 import AppLoader from '../components/ui/AppLoader.vue'
-import RequestFilter from '../components/request/RequestFilter.vue'
+import AppStatus from '../components/ui/AppStatus.vue'
+import { currency } from '../helpers/currency'
 
 export default {
-  components: { AppModal, RequestTable, RequesModal, AppLoader, RequestFilter },
+  components: { AppPage, AppLoader, AppStatus },
   name: 'Request',
   setup () {
+    const route = useRoute()
     const store = useStore()
-    const modal = ref(false)
-    const loading = ref(false)
-    const filter = ref({})
+    const loading = ref(true)
+    const request = ref({})
 
     onMounted(async () => {
       loading.value = true
-      store.dispatch('request/load')
+      request.value = await store.dispatch('request/loadOne', route.params.id)
       loading.value = false
     })
 
-    const requests = computed(() =>
-      store.getters['request/requests']
-        .filter(request => {
-          if (filter.value.name) {
-            return request.name.includes(filter.value.name)
-          }
-          return request
-        })
-        .filter(request => {
-          if (filter.value.status) {
-            return filter.value.status === request.status
-          }
-          return request
-        })
-    )
-    return {
-      modal,
-      requests,
-      loading,
-      filter
-    }
+    return { loading, request, currency }
   }
 }
 </script>
