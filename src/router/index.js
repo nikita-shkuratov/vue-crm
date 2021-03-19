@@ -21,11 +21,10 @@ const routes = [
       auth: true
     }
   },
-  /*
   {
     path: '/help',
     name: 'Help',
-    component: () => import(''),
+    component: () => import('../views/Help.vue'),
     meta: {
       layout: 'main',
       auth: true
@@ -34,12 +33,12 @@ const routes = [
   {
     path: '/message',
     name: 'Message',
-    component: () => import(''),
+    component: () => import('../views/Message.vue'),
     meta: {
       layout: 'main',
       auth: true
     }
-  }, */
+  },
   {
     path: '/auth',
     name: 'Auth',

@@ -4,7 +4,7 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/reguest">Requests</router-link>
+        <router-link to="/">Requests</router-link>
       </li>
       <li>
         <router-link to="/help">Help</router-link>
