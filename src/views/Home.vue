@@ -2,7 +2,9 @@
   <app-page>
     <app-loader v-if="loading" />
     <div v-else>
-      <button @click="modal = true">create</button>
+      <div>
+        <p class="title-request"><span class="btn-create" @click="modal = true">Create</span> a new request</p>
+      </div>
       <request-filter v-model="filter"></request-filter>
       <request-table :requests="requests || []"></request-table>
       <teleport to="body">
@@ -71,4 +73,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.btn-create{
+  color: #5db678;
+  font-weight: 400;
+  cursor: pointer;
+}
+</style>

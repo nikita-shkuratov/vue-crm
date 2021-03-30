@@ -20,11 +20,7 @@
           <td>{{ currency(r.amount) }}</td>
           <td><app-status :type="r.status" /></td>
           <td>
-            <router-link
-              v-slot="{ navigate }"
-              custom
-              :to="`/reguest/${r.id}`"
-            >
+            <router-link v-slot="{ navigate }" custom :to="`/reguest/${r.id}`">
               <button class="button" @click="navigate">Open</button>
             </router-link>
           </td>
@@ -46,4 +42,29 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.table {
+  margin-top: 30px;
+  border-collapse: collapse;
+}
+th,
+td {
+  width: 20%;
+  text-align: start;
+  padding: 8px;
+  border-bottom: 1px solid #b7c3d6;
+}
+.button {
+  width: 80px;
+  border: 1px solid#25af86;
+  border-radius: 24px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #25af86;
+  padding: 5px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+</style>

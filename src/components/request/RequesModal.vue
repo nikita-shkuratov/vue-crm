@@ -95,6 +95,7 @@ export default {
   line-height: 20px;
   color: #333333;
   padding: 20px;
+  width:400px;
 
   .title {
     text-align: center;
