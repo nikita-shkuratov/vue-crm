@@ -6,6 +6,7 @@ export default {
   state () {
     return { token: localStorage.getItem('jwt-token') || null }
   },
+
   mutations: {
     setToken (state, token) {
       state.token = token
@@ -16,11 +17,11 @@ export default {
       localStorage.removeItem('jwt-token')
     }
   },
+
   actions: {
     async login ({ commit, dispatch }, payload) {
       try {
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`
-        console.log(url)
+        const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCF1zsP6oJi3Mr2311L3YiY8KD3HShnSUQ'
         const { data } = await axios.post(url, payload)
         commit('setToken', data.idToken)
         commit('clearMessage', null, { root: true })

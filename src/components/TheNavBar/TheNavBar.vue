@@ -4,7 +4,7 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/auth">Requests</router-link>
+        <router-link to="/">Requests</router-link>
       </li>
       <li>
         <router-link to="/help">Help</router-link>
@@ -70,6 +70,9 @@ export default {
       font-size: 16px;
       line-height: 20px;
       color: #ffffff;
+      &.active {
+        color: #5856567e;
+      }
     }
   }
 }

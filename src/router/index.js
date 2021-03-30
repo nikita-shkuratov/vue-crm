@@ -13,9 +13,27 @@ const routes = [
     }
   },
   {
+    path: '/reguest/:id',
+    name: 'Requests',
+    component: () => import('../views/Request.vue'),
+    meta: {
+      layout: 'main',
+      auth: true
+    }
+  },
+  {
     path: '/help',
     name: 'Help',
     component: () => import('../views/Help.vue'),
+    meta: {
+      layout: 'main',
+      auth: true
+    }
+  },
+  {
+    path: '/message',
+    name: 'Message',
+    component: () => import('../views/Message.vue'),
     meta: {
       layout: 'main',
       auth: true
@@ -34,7 +52,9 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+  linkActiveClass: 'active',
+  linkExactActiveClass: 'active'
 })
 
 router.beforeEach((to, from, next) => {
