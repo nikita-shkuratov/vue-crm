@@ -1,7 +1,10 @@
 <template>
   <div class="pages">
-    <div class="breadcrumbs" v-if="back">
-      <router-link to="/">back to home page</router-link>
+    <div v-if="back">
+      <router-link class="breadcrumbs" to="/"
+        ><div class="arrow-ico"></div>
+        back to home page</router-link
+      >
     </div>
     <slot />
   </div>
@@ -18,7 +21,19 @@ export default {
 }
 </script>
 
-<style scoped>
-.pages {
+<style scoped lang="scss">
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: #90949f;
+}
+.arrow-ico {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+  background-image: url('../../assets/ico/arrow.svg');
 }
 </style>

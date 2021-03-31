@@ -1,8 +1,10 @@
 <template>
-  <the-nav-bar></the-nav-bar>
-  <div class="container">
-    <app-message></app-message>
-    <router-view />
+  <div class="wrapper">
+    <the-nav-bar></the-nav-bar>
+    <app-message class="main-layout-message"></app-message>
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -23,5 +25,15 @@ export default {
   box-shadow: 0px 4px 26px rgba(93, 182, 120, 0.5);
   border-radius: 25px 0px 25px 0px;
   padding: 10px 20px;
+}
+.wrapper {
+  position: relative;
+  .main-layout-message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 </style>

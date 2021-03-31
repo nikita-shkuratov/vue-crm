@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <h4 v-if="requests.length === 0" class="text-info">no requests</h4>
+    <h4 v-if="requests.length === 0" class="text-info">No requests.</h4>
     <table v-else class="table">
       <thead>
         <tr>
@@ -66,5 +66,9 @@ td {
   &:focus {
     outline: none;
   }
+}
+.text-info{
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight: normal;
 }
 </style>
