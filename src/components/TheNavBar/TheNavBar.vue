@@ -4,13 +4,13 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/">Requests</router-link>
+        <router-link to="/bank">Requests</router-link>
       </li>
       <li>
-        <router-link to="/help">Help</router-link>
+        <router-link to="/bank/help">Help</router-link>
       </li>
       <li>
-        <router-link to="/message">Messages</router-link>
+        <router-link to="/bank/message">Messages</router-link>
       </li>
       <li>
         <router-link to="/auth" @click.prevent="logout">Exit</router-link>

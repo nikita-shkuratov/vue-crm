@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AppPage from '../components/ui/AppPage.vue'
+import AppPage from '../../components/ui/AppPage.vue'
 
 export default {
   components: { AppPage },
