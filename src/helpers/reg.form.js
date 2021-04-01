@@ -4,7 +4,7 @@ import { useStore } from 'vuex'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
 
-export const useLogin = () => {
+export const useReg = () => {
   const store = useStore()
   const router = useRouter()
   const { handleSubmit, isSubmitting, submitCount } = useForm()
@@ -23,12 +23,16 @@ export const useLogin = () => {
       .trim()
       .required()
       .min(6)
+      .max(10)
   )
 
   const onSubmit = handleSubmit(async values => {
     try {
-      await store.dispatch('auth/login', { ...values, returnSecureToken: true })
-      router.push('/')
+      await store.dispatch('register/reg', {
+        ...values,
+        returnSecureToken: true
+      })
+      router.push('/auth')
     } catch (e) {
       console.log(e)
     }

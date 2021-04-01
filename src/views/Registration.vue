@@ -1,9 +1,9 @@
 <template>
   <form class="container" @submit.prevent="onSubmit">
-    <div class="title">Authorization</div>
+    <div class="title">Registering a new user</div>
     <div class="text">
-      If you don't have an account you can
-      <router-link class="reg" to="/registration"><p>Register</p></router-link>
+      If you have account you need to
+      <router-link class="reg" to="/auth"><p>Log in</p></router-link>
     </div>
 
     <div class="form-control">
@@ -23,7 +23,7 @@
           <label for="password">Password</label>
           <input
             :class="['myInput', { invalid: pError }]"
-            type="password"
+            type="text"
             id="password"
             v-model="password"
             @blur="pBlur"
@@ -38,7 +38,7 @@
           type="submit"
           :disabled="isSubmitting || isTooManyAttempts"
         >
-          Enter
+          Сonfirm
         </button>
       </div>
     </div>
@@ -48,7 +48,7 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import { useLogin } from '../helpers/login.form'
+import { useReg } from '../helpers/reg.form'
 import { error } from '../helpers/error'
 
 export default {
@@ -61,7 +61,7 @@ export default {
         type: 'danger'
       })
     }
-    return { ...useLogin() }
+    return { ...useReg() }
   }
 }
 </script>

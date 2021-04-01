@@ -47,11 +47,20 @@ const routes = [
       layout: 'auth',
       auth: false
     }
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: () => import('../views/Registration.vue'),
+    meta: {
+      layout: 'reg',
+      auth: false
+    }
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
   linkActiveClass: 'active',
   linkExactActiveClass: 'active'
