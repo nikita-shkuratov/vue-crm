@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import auth from './modules/auth.module'
 import request from './modules/request.module'
+import register from './modules/reg.module'
 
 export default createStore({
   state () {
@@ -21,12 +22,13 @@ export default createStore({
       commit('setMessage', message)
       setTimeout(() => {
         commit('clearMessage')
-      }, 7000)
+      }, 2000)
     }
   },
 
   modules: {
     auth,
-    request
+    request,
+    register
   }
 })

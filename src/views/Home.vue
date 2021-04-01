@@ -1,82 +1,40 @@
 <template>
-  <app-page>
-    <app-loader v-if="loading" />
-    <div v-else>
-      <div>
-        <p class="title-request"><span class="btn-create" @click="modal = true">Create</span> a new request</p>
-      </div>
-      <request-filter v-model="filter"></request-filter>
-      <request-table :requests="requests || []"></request-table>
-      <teleport to="body">
-        <app-modal v-if="modal" @close="modal = false"
-          ><reques-modal @created="modal = false" />
-        </app-modal>
-      </teleport>
-    </div>
-  </app-page>
+  <div class="card crm">
+    <router-link class="link-title" to="/crm">CRM</router-link>
+  </div>
+  <div class="card">
+    <router-link class="link-title" to="/bank">Online Bank</router-link>
+  </div>
 </template>
 
 <script>
-import AppPage from '../components/ui/AppPage.vue'
-import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import AppModal from '../components/ui/AppModal.vue'
-import RequestTable from '../components/request/RequestTable.vue'
-import RequesModal from '../components/request/RequesModal.vue'
-import AppLoader from '../components/ui/AppLoader.vue'
-import RequestFilter from '../components/request/RequestFilter.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    AppPage,
-    AppModal,
-    RequestTable,
-    RequesModal,
-    AppLoader,
-    RequestFilter
-  },
-  setup () {
-    const store = useStore()
-    const modal = ref(false)
-    const loading = ref(false)
-    const filter = ref({})
-
-    onMounted(async () => {
-      loading.value = true
-      store.dispatch('request/load')
-      loading.value = false
-    })
-
-    const requests = computed(() =>
-      store.getters['request/requests']
-        .filter(request => {
-          if (filter.value.name) {
-            return request.name.includes(filter.value.name)
-          }
-          return request
-        })
-        .filter(request => {
-          if (filter.value.status) {
-            return filter.value.status === request.status
-          }
-          return request
-        })
-    )
-    return {
-      modal,
-      requests,
-      loading,
-      filter
-    }
-  }
+  name: 'Home'
 }
 </script>
 
 <style scoped lang="scss">
-.btn-create{
-  color: #5db678;
-  font-weight: 400;
-  cursor: pointer;
+.card {
+  margin: 20px;
+  height: 300px;
+  width: 300px;
+  font-family: 'Didact Gothic', sans-serif;
+  background: #ffffff;
+  box-shadow: 0px 4px 26px rgba(93, 182, 120, 0.5);
+  border-radius: 25px 0px 25px 0px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  &.crm{
+     box-shadow: 0px 4px 26px rgba(182, 93, 178, 0.5);
+  }
+
+  .link-title {
+    text-decoration: none;
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    color: #333333;
+  }
 }
 </style>

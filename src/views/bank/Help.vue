@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import QuestionItem from '../components/question/QuestionItem.vue'
-import AppPage from '../components/ui/AppPage.vue'
+import QuestionItem from '../../components/question/QuestionItem.vue'
+import AppPage from '../../components/ui/AppPage.vue'
 
 export default {
   components: { AppPage, QuestionItem },

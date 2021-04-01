@@ -1,6 +1,6 @@
 <template>
   <div class="table">
-    <h4 v-if="requests.length === 0" class="text-info">no requests</h4>
+    <h4 v-if="requests.length === 0" class="text-info">No requests.</h4>
     <table v-else class="table">
       <thead>
         <tr>
@@ -20,7 +20,7 @@
           <td>{{ currency(r.amount) }}</td>
           <td><app-status :type="r.status" /></td>
           <td>
-            <router-link v-slot="{ navigate }" custom :to="`/reguest/${r.id}`">
+            <router-link v-slot="{ navigate }" custom :to="`/bank/reguest/${r.id}`">
               <button class="button" @click="navigate">Open</button>
             </router-link>
           </td>
@@ -66,5 +66,9 @@ td {
   &:focus {
     outline: none;
   }
+}
+.text-info{
+    font-family: 'Didact Gothic', sans-serif;
+    font-weight: normal;
 }
 </style>

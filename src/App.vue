@@ -7,6 +7,8 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import AuthLayout from './layout/Auth.layout'
 import MainLayout from './layout/Main.layout'
+import RegLayout from './layout/Reg.layout'
+import BankLayout from './layout/Bank.layout'
 
 export default {
   setup () {
@@ -17,7 +19,9 @@ export default {
   },
   components: {
     AuthLayout,
-    MainLayout
+    MainLayout,
+    RegLayout,
+    BankLayout
   }
 }
 </script>

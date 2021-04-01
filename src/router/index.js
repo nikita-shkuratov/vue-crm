@@ -13,29 +13,38 @@ const routes = [
     }
   },
   {
-    path: '/reguest/:id',
+    path: '/bank',
+    name: 'Bank',
+    component: () => import('../views/bank/Bank.vue'),
+    meta: {
+      layout: 'bank',
+      auth: true
+    }
+  },
+  {
+    path: '/bank/reguest/:id',
     name: 'Requests',
-    component: () => import('../views/Request.vue'),
+    component: () => import('../views/bank/Request.vue'),
     meta: {
-      layout: 'main',
+      layout: 'bank',
       auth: true
     }
   },
   {
-    path: '/help',
+    path: '/bank/help',
     name: 'Help',
-    component: () => import('../views/Help.vue'),
+    component: () => import('../views/bank/Help.vue'),
     meta: {
-      layout: 'main',
+      layout: 'bank',
       auth: true
     }
   },
   {
-    path: '/message',
+    path: '/bank/message',
     name: 'Message',
-    component: () => import('../views/Message.vue'),
+    component: () => import('../views/bank/Message.vue'),
     meta: {
-      layout: 'main',
+      layout: 'bank',
       auth: true
     }
   },
@@ -47,11 +56,20 @@ const routes = [
       layout: 'auth',
       auth: false
     }
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: () => import('../views/Registration.vue'),
+    meta: {
+      layout: 'reg',
+      auth: false
+    }
   }
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes,
   linkActiveClass: 'active',
   linkExactActiveClass: 'active'
