@@ -1,5 +1,5 @@
 <template>
-  <app-page>
+  <app-page back>
     <app-loader v-if="loading" />
     <div v-else>
       <div>

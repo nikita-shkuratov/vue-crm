@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <the-nav-bar></the-nav-bar>
+    <the-sidebar></the-sidebar>
     <app-message class="main-layout-message"></app-message>
     <div class="container">
       <router-view />
@@ -10,16 +11,18 @@
 
 <script>
 import TheNavBar from '../components/TheNavBar/TheNavBar'
+import TheSidebar from '../components/TheSideBar/TheSidebar.vue'
 import AppMessage from '../components/ui/AppMessage.vue'
+
 export default {
-  components: { TheNavBar, AppMessage }
+  components: { TheNavBar, AppMessage, TheSidebar }
 }
 </script>
 
 <style lang="scss" scoped>
 .container {
   margin-top: 30px;
-  height: 600px;
+  min-height: 600px;
   font-family: 'Didact Gothic', sans-serif;
   background: #ffffff;
   box-shadow: 0px 4px 26px rgba(93, 182, 120, 0.5);

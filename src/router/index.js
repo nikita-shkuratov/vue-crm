@@ -31,18 +31,9 @@ const routes = [
     }
   },
   {
-    path: '/bank/help',
+    path: '/help',
     name: 'Help',
     component: () => import('../views/bank/Help.vue'),
-    meta: {
-      layout: 'bank',
-      auth: true
-    }
-  },
-  {
-    path: '/bank/message',
-    name: 'Message',
-    component: () => import('../views/bank/Message.vue'),
     meta: {
       layout: 'bank',
       auth: true

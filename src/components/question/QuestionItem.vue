@@ -16,4 +16,31 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.question {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.question-title {
+  width: 40%;
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  box-shadow: 0px 4px 15px rgba(6, 12, 8, 0.5);
+  cursor: pointer;
+}
+.question-budy {
+  width: 40%;
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  color: #90949f;
+  box-shadow: 0px 4px 15px rgba(6, 12, 8, 0.5);
+}
+</style>
