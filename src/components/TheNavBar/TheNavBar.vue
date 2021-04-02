@@ -4,13 +4,15 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/bank">Requests</router-link>
+        <router-link to="/bank"
+         custom v-slot="{href, navigate}">
+         <a @click="navigate" :class="{active: $route.path.indexOf(href) != -1}" href="#"> Requests</a></router-link>
       </li>
       <li>
-        <router-link to="/bank/help">Help</router-link>
+        <router-link to="/help">Help</router-link>
       </li>
       <li>
-        <router-link to="/bank/message">Messages</router-link>
+        <a href="#" @click.prevent="open">Messages</a>
       </li>
       <li>
         <router-link to="/auth" @click.prevent="logout">Exit</router-link>
@@ -30,7 +32,8 @@ export default {
       logout: () => {
         store.commit('auth/logout')
         router.push('/auth')
-      }
+      },
+      open: () => store.commit('openSidebar')
     }
   }
 }
