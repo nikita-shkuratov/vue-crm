@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('showSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <!--   <span class="black-text">{{ date | date('datetime') }}</span> -->
+        <span class="black-text">{{ filter(date) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-      User Name
+            {{name}}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -41,36 +41,48 @@
 
 <script>
 export default {
-  emits: ['showSidebar']
-  /* data: () => ({
+  emits: ['showSidebar'],
+  data: () => ({
     date: new Date(),
     interval: null,
     dropdown: null
   }),
   methods: {
-    async logout () {
-      await this.$store.dispatch('logout')
-      this.$router.push('/login?message=logout')
+    logout () {
+      this.$store.commit('auth/logout')
+      this.$router.push('/auth')
+    },
+    filter (value) {
+      const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      }
+      /*       const locale = store.getters.info.locale || 'ru-RU' */
+      const locale = 'ru-RU'
+      return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }
   },
   computed: {
     name () {
-      return this.$store.getters.info.name
+      console.log(this.$store.getters['register/getUser'])
+      return 'user name'
     }
   },
   mounted () {
     this.interval = setInterval(() => {
       this.date = new Date()
     }, 1000)
+    // eslint-disable-next-line
     this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
       constrainWidth: false
     })
   },
-  beforeDestroy () {
+  beforeUnmount () {
     clearInterval(this.interval)
     if (this.dropdown && this.dropdown.destroy) {
       this.dropdown.destroy()
     }
-  } */
+  }
 }
 </script>
