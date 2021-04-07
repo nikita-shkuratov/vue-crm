@@ -4,17 +4,13 @@ import { error } from '../../helpers/error'
 export default {
   namespaced: true,
   state () {
-    return { token: localStorage.getItem('jwt-token') || null, user: null }
+    return { token: localStorage.getItem('jwt-token') || null }
   },
 
   mutations: {
     setToken (state, token) {
       state.token = token
       localStorage.setItem('jwt-token', token)
-    },
-    setUser (state, userData) {
-      console.log('userData', userData)
-      state.user = userData
     }
   },
 
@@ -33,15 +29,7 @@ export default {
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users.json?auth=${data.idToken}`,
           payload
         )
-        console.log('response', response)
-        /*    if (response.status === 200) {
-          localStorage.setItem('db-user', response.data.name)
-          commit('setUser', {
-            firstName: payload.firstName,
-            lastName: payload.lastName,
-            email: payload.email
-          })
-        } */
+        console.log(response)
       } catch (e) {
         dispatch(
           'setMessage',
@@ -53,24 +41,6 @@ export default {
         )
         throw new Error()
       }
-    },
-    async loadUser ({ commit }, store) {
-      try {
-        const token = store.getters['auth/token']
-        const id = localStorage.getItem('db-user')
-        const { data } = await axios.get(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}.json?auth=${token}`
-        )
-        commit('setUser', data)
-      } catch (e) {
-        console.log(e)
-      }
-    }
-  },
-
-  getters: {
-    getUser (state) {
-      return state.user
     }
   }
 }

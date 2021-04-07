@@ -30,7 +30,7 @@ import AppLoader from '../../components/ui/AppLoader.vue'
 import RequestFilter from '../../components/request/RequestFilter.vue'
 
 export default {
-  name: 'Home',
+  name: 'Bank',
   components: {
     AppPage,
     AppModal,

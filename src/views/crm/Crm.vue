@@ -3,35 +3,39 @@
     <div class="page-title">
       <h3>Счет</h3>
 
-      <!-- <button class="btn waves-effect waves-light btn-small" @click="refresh">
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
 
-    <Loader v-if="loading" />
+    <app-loader v-if="loading" />
 
     <div v-else class="row">
-      <HomeBill :rates="currency.rates" />
-
-      <HomeCurrency :rates="currency.rates" :date="currency.date" /> -->
+      <CrmBill :rates="currency.rates" />
+      <HomeCurrency :rates="currency.rates" :date="currency.date" />
     </div>
   </div>
 </template>
 
 <script>
-/* import HomeBill from '@/components/HomeBill'
-import HomeCurrency from '@/components/HomeCurrency' */
+import CrmBill from '../../components/crm/CrmBill/CrmBill'
+import HomeCurrency from '../../components/crm/CrmCurrency/CrmCurrency'
+import AppLoader from '../../components/ui/AppLoader.vue'
 
 export default {
-  name: 'crm'
-  /* data: () => ({
+  name: 'crm',
+
+  data: () => ({
     loading: true,
     currency: null
   }),
+
   async mounted () {
     this.currency = await this.$store.dispatch('fetchCurrency')
+    console.log('currency', this.currency)
     this.loading = false
   },
+
   methods: {
     async refresh () {
       this.loading = true
@@ -40,8 +44,9 @@ export default {
     }
   },
   components: {
-    HomeBill,
-    HomeCurrency
-  } */
+    CrmBill,
+    HomeCurrency,
+    AppLoader
+  }
 }
 </script>

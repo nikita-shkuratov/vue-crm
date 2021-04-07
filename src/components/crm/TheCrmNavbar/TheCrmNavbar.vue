@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            {{name}}
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -65,8 +65,8 @@ export default {
   },
   computed: {
     name () {
-      console.log(this.$store.getters['register/getUser'])
-      return 'user name'
+      const { firstName, lastName } = this.$store.getters.getUser
+      return `${firstName} ${lastName}`
     }
   },
   mounted () {
