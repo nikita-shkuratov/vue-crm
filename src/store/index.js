@@ -3,6 +3,7 @@ import axios from 'axios'
 import auth from './modules/auth.module'
 import request from './modules/request.module'
 import register from './modules/reg.module'
+import category from './modules/category.module'
 
 export default createStore({
   state () {
@@ -54,7 +55,8 @@ export default createStore({
   modules: {
     auth,
     request,
-    register
+    register,
+    category
   },
 
   getters: {

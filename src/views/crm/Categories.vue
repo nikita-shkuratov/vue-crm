@@ -1,13 +1,12 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>Categories</h3>
     </div>
-    <!--  <section>
-      <Loader v-if="loading" />
+    <section>
+      <app-loader v-if="loading" />
       <div class="row" v-else>
         <CategoryCreate @created="addNewCategory" />
-
         <CategoryEdit
           v-if="categories.length"
           :categories="categories"
@@ -16,39 +15,53 @@
         />
         <p v-else class="center">Категорий пока нет</p>
       </div>
-    </section> -->
+    </section>
   </div>
 </template>
 
 <script>
-/* import CategoryCreate from '@/components/CategoryCreate'
-import CategoryEdit from '@/components/CategoryEdit'
- */
+import CategoryCreate from '../../components/crm/CategoryCreate/CategoryCreate'
+import CategoryEdit from '../../components/crm/CategoryEdit/CategoryEdit'
+import { ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import AppLoader from '../../components/ui/AppLoader.vue'
+
 export default {
-  name: 'categories'
-  /*  data: () => ({
-    categories: [],
-    loading: true,
-    updateCount: 0
-  }),
-  async mounted () {
-    this.categories = await this.$store.dispatch('fetchCategories')
-    this.loading = false
-  },
   components: {
     CategoryCreate,
+    AppLoader,
     CategoryEdit
   },
-  methods: {
-    addNewCategory (category) {
-      this.categories.push(category)
-    },
-    updateCategories (category) {
-      const idx = this.categories.findIndex(c => c.id === category.id)
-      this.categories[idx].title = category.title
-      this.categories[idx].limit = category.limit
-      this.updateCount++
+
+  setup () {
+    const store = useStore()
+    const loading = ref(true)
+    const categories = ref([])
+    const updateCount = ref(0)
+
+    onMounted(async () => {
+      loading.value = true
+      store.dispatch('category/fetchCategories')
+      categories.value = store.getters['category/getCategories']
+      loading.value = false
+    })
+
+    const addNewCategory = category => categories.value.push(category)
+
+    /*     const updateCategories = category => {
+      const idx = categories.value.findIndex(c => c.id === category.id)
+      categories[idx].title = category.title
+      categories[idx].limit = category.limit
+      updateCount.value++
+    } */
+
+    return {
+      categories,
+      loading,
+      updateCount,
+      addNewCategory
+      /* updateCategories */
     }
-  } */
+  }
 }
 </script>
