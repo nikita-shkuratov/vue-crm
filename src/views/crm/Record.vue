@@ -1,24 +1,24 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>New entry</h3>
     </div>
 
-    <!--  <Loader v-if="loading" />
+    <app-loader v-if="loading" />
 
     <p class="center" v-else-if="!categories.length">
-      Категорий пока нет.
-      <router-link to="/categories">Добавить новую категорию</router-link>
+      There are no categories yet.
+      <router-link to="/categories">Add a new category</router-link>
     </p>
 
-    <form class="form" v-else @submit.prevent="handleSubmit">
+    <form class="form" v-else @submit.prevent="onSubmit">
       <div class="input-field">
         <select ref="select" v-model="category">
           <option v-for="c in categories" :key="c.id" :value="c.id">{{
             c.title
           }}</option>
         </select>
-        <label>Выберите категорию</label>
+        <label>Select a category</label>
       </div>
 
       <p>
@@ -30,7 +30,7 @@
             value="income"
             v-model="type"
           />
-          <span>Доход</span>
+          <span>Income</span>
         </label>
       </p>
 
@@ -43,24 +43,23 @@
             value="outcome"
             v-model="type"
           />
-          <span>Расход</span>
+          <span>Expenditure</span>
         </label>
       </p>
+      <small class="error-message" v-if="typeError">{{ typeError }}</small>
 
       <div class="input-field">
         <input
           id="amount"
           type="number"
           v-model.number="amount"
-          :class="{ invalid: $v.amount.$dirty && !$v.amount.minValue }"
+          :class="['myInput', { invalid: amountError }]"
+          @blur="amountBlur"
         />
-        <label for="amount">Сумма</label>
-        <span
-          v-if="$v.amount.$dirty && !$v.amount.minValue"
-          class="helper-text invalid"
-        >
-          Минимальная значение {{ $v.amount.$params.minValue.min }}
-        </span>
+        <label for="amount">Summ</label>
+        <small class="error-message" v-if="amountError">{{
+          amountError
+        }}</small>
       </div>
 
       <div class="input-field">
@@ -68,106 +67,112 @@
           id="description"
           type="text"
           v-model="description"
-          :class="{
-            invalid: $v.description.$dirty && !$v.description.required
-          }"
+          :class="['myInput', { invalid: descriptionError }]"
+          @blur="titleBlur"
         />
-        <label for="description">Описание</label>
-        <span
-          v-if="$v.description.$dirty && !$v.description.required"
-          class="helper-text invalid"
-        >
-          Введите описание
-        </span>
+        <label for="description">Description</label>
+        <small class="error-message" v-if="descriptionError">{{
+          descriptionError
+        }}</small>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        Create
         <i class="material-icons right">send</i>
       </button>
-    </form> -->
+    </form>
   </div>
 </template>
 
 <script>
-/* import { required, minValue } from 'vuelidate/lib/validators'
-import { mapGetters } from 'vuex' */
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import AppLoader from '../../components/ui/AppLoader.vue'
+import { useStore } from 'vuex'
+import { useRecordForm } from '../../helpers/record.form'
+
 export default {
-  name: 'record'
-  /* data: () => ({
-    loading: true,
-    select: null,
-    categories: [],
-    category: null,
-    type: 'outcome',
-    amount: 1,
-    description: ''
-  }),
-  validations: {
-    amount: { minValue: minValue(1) },
-    description: { required }
-  },
-  async mounted () {
-    this.categories = await this.$store.dispatch('fetchCategories')
-    this.loading = false
+  components: { AppLoader },
+  name: 'record',
+  setup () {
+    const store = useStore()
+    const loading = ref(true)
+    const selectData = ref('')
+    const select = ref(null)
+    const categories = ref([])
+    const category = ref(null)
+    const type = ref('outcome')
+    const amount = ref(1)
+    const description = ref('')
+    const myBill = ref(null)
 
-    if (this.categories.length) {
-      this.category = this.categories[0].id
-    }
+    onMounted(async () => {
+      store.dispatch('category/fetchCategories')
+      categories.value = store.getters['category/getCategories']
+      myBill.value = store.getters.getMyBill
+      loading.value = false
+      if (categories.value.length) {
+        category.value = categories.value[0].id
+      }
 
-    setTimeout(() => {
-      this.select = M.FormSelect.init(this.$refs.select)
-      M.updateTextFields()
-    }, 0)
-  },
-  computed: {
-    ...mapGetters(['info']),
-    canCreateRecord () {
-      if (this.type === 'income') {
+      setTimeout(() => {
+        // eslint-disable-next-line
+        select.value = M.FormSelect.init(select.value)
+        // eslint-disable-next-line
+        M.updateTextFields()
+      }, 0)
+    })
+
+    const canCreateRecord = computed(() => {
+      if (type.value === 'income') {
         return true
       }
+      return myBill.value >= amount.value
+    })
 
-      return this.info.bill >= this.amount
-    }
-  },
-  methods: {
-    async handleSubmit () {
-      if (this.$v.$invalid) {
-        this.$v.$touch()
-        return
-      }
+    const submit = async values => {
+      const { amount, description, type } = values
 
-      if (this.canCreateRecord) {
+      if (canCreateRecord.value) {
         try {
-          await this.$store.dispatch('createRecord', {
-            categoryId: this.category,
-            amount: this.amount,
-            description: this.description,
-            type: this.type,
+          await store.dispatch('record/createRecord', {
+            categoryId: category.value,
+            amount,
+            description,
+            type,
             date: new Date().toJSON()
           })
-          const bill =
-            this.type === 'income'
-              ? this.info.bill + this.amount
-              : this.info.bill - this.amount
 
-          await this.$store.dispatch('updateInfo', { bill })
-          this.$message('Запись успешно создана')
-          this.$v.$reset()
-          this.amount = 1
-          this.description = ''
+          /* const bill =
+            values.type === 'income'
+              ? myBill.value + values.amount
+              : myBill.value - values.amount
+
+          await store.dispatch('updateMyBill', { bill }) */
         } catch (e) {}
       } else {
-        this.$message(
-          `Недостаточно средств на счете (${this.amount - this.info.bill})`
+        console.log(
+          `Недостаточно средств на счете (${amount.value - myBill.value})`
         )
       }
     }
-  },
-  destroyed () {
-    if (this.select && this.select.destroy) {
-      this.select.destroy()
+
+    onUnmounted(() => {
+      if (select.value && select.value.destroy) {
+        select.value.destroy()
+      }
+    })
+
+    return {
+      loading,
+      selectData,
+      select,
+      categories,
+      category,
+      type,
+      amount,
+      description,
+      ...useRecordForm(submit)
     }
-  } */
+  }
 }
 </script>

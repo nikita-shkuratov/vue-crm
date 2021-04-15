@@ -4,6 +4,7 @@ import auth from './modules/auth.module'
 import request from './modules/request.module'
 import register from './modules/reg.module'
 import category from './modules/category.module'
+import record from './modules/record.module'
 
 export default createStore({
   state () {
@@ -11,7 +12,8 @@ export default createStore({
       message: null,
       sidebar: false,
       user: {},
-      bill: null
+      bill: null,
+      myBill: 10000
     }
   },
   mutations: {
@@ -56,7 +58,8 @@ export default createStore({
     auth,
     request,
     register,
-    category
+    category,
+    record
   },
 
   getters: {
@@ -65,6 +68,9 @@ export default createStore({
     },
     getBill (state) {
       return state.bill
+    },
+    getMyBill (state) {
+      return state.myBill
     }
   }
 })
