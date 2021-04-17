@@ -46,7 +46,19 @@ export default {
         console.log(e)
       }
     },
-
+    async fetchRecordById (_, recordId) {
+      console.log('rr', recordId)
+      try {
+        const token = store.getters['auth/token']
+        const { id } = store.getters.getUser
+        const { data } = await axios.get(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/records/${recordId}.json?auth=${token}`
+        )
+        return { ...data, id: recordId }
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async updateRecords (_, payload) {
       try {
         const token = store.getters['auth/token']

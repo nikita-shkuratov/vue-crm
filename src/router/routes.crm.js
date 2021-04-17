@@ -18,7 +18,7 @@ const routesCrm = [
     }
   },
   {
-    path: '/crm/detail',
+    path: '/crm/detail/:id',
     name: 'Detail',
     component: () => import('../views/crm/Detail.vue'),
     meta: {

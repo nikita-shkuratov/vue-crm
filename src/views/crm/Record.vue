@@ -43,7 +43,7 @@
             value="outcome"
             v-model="type"
           />
-          <span>Expenditure</span>
+          <span>Outcome</span>
         </label>
       </p>
       <small class="error-message" v-if="typeError">{{ typeError }}</small>

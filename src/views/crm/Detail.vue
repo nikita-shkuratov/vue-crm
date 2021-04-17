@@ -1,12 +1,12 @@
 <template>
   <div>
     detail
-    <!--   <Loader v-if="loading" />
+    <app-loader v-if="loading" />
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
-        <router-link to="/history" class="breadcrumb">История</router-link>
+        <router-link to="/crm/history" class="breadcrumb">История</router-link>
         <a @click.prevent class="breadcrumb">
-          {{ record.type === 'income' ? 'Доход' : 'Расход' }}
+          {{ record.type === 'income' ? 'Income' : 'Outcome' }}
         </a>
       </div>
       <div class="row">
@@ -18,42 +18,55 @@
               green: record.type === 'income'
             }"
           >
-        <div class="card-content white-text">
-              <p>Описание: {{ record.description }}</p>
-              <p>Сумма: {{ record.amount | currency }}</p>
-              <p>Категория: {{ record.categoryName }}</p>
+            <div class="card-content white-text">
+              <p>Description: {{ record.description }}</p>
+              <p>Amount: {{ record.amount }}</p>
+              <p>Category: {{ record.categoryName }}</p>
 
-              <small>{{ record.date | date('datetime') }}</small>
+              <small>{{ record.date }}</small>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <p class="center" v-else>Запись с id={{ $route.params.id }} не найдена</p> -->
+    <p class="center" v-else>Запись с id={{ $route.params.id }} не найдена</p>
   </div>
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import AppLoader from '../../components/ui/AppLoader.vue'
+
 export default {
-  name: 'detail'
-  /*  data: () => ({
-    record: null,
-    loading: true
-  }),
-  async mounted () {
-    const id = this.$route.params.id
-    const record = await this.$store.dispatch('fetchRecordById', id)
-    const category = await this.$store.dispatch(
-      'fetchCategoryById',
-      record.categoryId
-    )
+  components: { AppLoader },
+  name: 'detail',
 
-    this.record = {
-      ...record,
-      categoryName: category.title
+  setup () {
+    const store = useStore()
+    const loading = ref(true)
+    const record = ref(null)
+    const route = useRoute()
+    console.log(record.value)
+
+    onMounted(async () => {
+      const id = route.params.id
+      record.value = await store.dispatch('record/fetchRecordById', id)
+      const category = await store.dispatch('category/fetchCategoryById', record.value.categoryId)
+
+      record.value = {
+        ...record.value,
+        categoryName: category.title
+      }
+
+      loading.value = false
+    })
+
+    return {
+      record,
+      loading
     }
-
-    this.loading = false
-  } */
+  }
 }
 </script>

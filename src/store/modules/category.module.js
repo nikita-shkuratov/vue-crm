@@ -45,6 +45,18 @@ export default {
         console.log(e)
       }
     },
+    async fetchCategoryById (_, categoryId) {
+      try {
+        const token = store.getters['auth/token']
+        const { id } = store.getters.getUser
+        const { data } = await axios.get(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories/${categoryId}.json?auth=${token}`
+        )
+        return { ...data, id: categoryId }
+      } catch (e) {
+        console.log(e)
+      }
+    },
     async updateCategory (_, payload) {
       try {
         const token = store.getters['auth/token']
