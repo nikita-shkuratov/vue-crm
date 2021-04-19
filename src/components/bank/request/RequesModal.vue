@@ -65,7 +65,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import { useRequestForm } from '../../helpers/request.form'
+import { useRequestForm } from '../../../helpers/request.form'
 
 export default {
   emits: ['created'],

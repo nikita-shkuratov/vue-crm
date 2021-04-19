@@ -31,8 +31,8 @@
 </template>
 
 <script>
-import { currency } from '../../helpers/currency'
-import AppStatus from '../ui/AppStatus.vue'
+import { currency } from '../../../helpers/currency'
+import AppStatus from '../../ui/AppStatus.vue'
 export default {
   components: { AppStatus },
   props: ['requests'],

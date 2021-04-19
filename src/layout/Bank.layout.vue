@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import TheNavBar from '../components/TheNavBar/TheNavBar'
-import TheSidebar from '../components/TheSideBar/TheSidebar.vue'
+import TheNavBar from '../components/bank/TheNavBar/TheNavBar'
+import TheSidebar from '../components/bank/TheSideBar/TheSidebar.vue'
 import AppMessage from '../components/ui/AppMessage.vue'
 
 export default {
