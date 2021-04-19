@@ -1,15 +1,17 @@
 <template>
   <div class="wrapper">
     <app-message class="main-layout-message"></app-message>
-      <router-view />
+    <app-loader class="loader" v-if="loading" />
+    <router-view />
   </div>
 </template>
 
 <script>
-
 import AppMessage from '../components/ui/AppMessage.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
+
 export default {
-  components: { AppMessage }
+  components: { AppMessage, AppLoader }
 }
 </script>
 

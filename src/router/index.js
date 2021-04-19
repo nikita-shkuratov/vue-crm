@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store'
 import Home from '../views/Home.vue'
+import routesBank from './routes.bank'
+import routesCrm from './routes.crm'
 
 const routes = [
   {
@@ -9,33 +11,6 @@ const routes = [
     component: Home,
     meta: {
       layout: 'main',
-      auth: true
-    }
-  },
-  {
-    path: '/bank',
-    name: 'Bank',
-    component: () => import('../views/bank/Bank.vue'),
-    meta: {
-      layout: 'bank',
-      auth: true
-    }
-  },
-  {
-    path: '/bank/reguest/:id',
-    name: 'Requests',
-    component: () => import('../views/bank/Request.vue'),
-    meta: {
-      layout: 'bank',
-      auth: true
-    }
-  },
-  {
-    path: '/help',
-    name: 'Help',
-    component: () => import('../views/bank/Help.vue'),
-    meta: {
-      layout: 'bank',
       auth: true
     }
   },
@@ -56,7 +31,9 @@ const routes = [
       layout: 'reg',
       auth: false
     }
-  }
+  },
+  ...routesBank,
+  ...routesCrm
 ]
 
 const router = createRouter({

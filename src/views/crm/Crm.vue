@@ -1,0 +1,52 @@
+<template>
+  <div>
+    <div class="page-title">
+      <h3>Счет</h3>
+
+      <button class="btn waves-effect waves-light btn-small" @click="refresh">
+        <i class="material-icons">refresh</i>
+      </button>
+    </div>
+
+    <app-loader v-if="loading" />
+
+    <div v-else class="row">
+      <CrmBill :rates="currency.rates" />
+      <HomeCurrency :rates="currency.rates" :date="currency.date" />
+    </div>
+  </div>
+</template>
+
+<script>
+import CrmBill from '../../components/crm/CrmBill/CrmBill'
+import HomeCurrency from '../../components/crm/CrmCurrency/CrmCurrency'
+import AppLoader from '../../components/ui/AppLoader.vue'
+
+export default {
+  name: 'crm',
+
+  data: () => ({
+    loading: true,
+    currency: null
+  }),
+
+  async mounted () {
+    this.currency = await this.$store.dispatch('fetchCurrency')
+    console.log('currency', this.currency)
+    this.loading = false
+  },
+
+  methods: {
+    async refresh () {
+      this.loading = true
+      this.currency = await this.$store.dispatch('fetchCurrency')
+      this.loading = false
+    }
+  },
+  components: {
+    CrmBill,
+    HomeCurrency,
+    AppLoader
+  }
+}
+</script>

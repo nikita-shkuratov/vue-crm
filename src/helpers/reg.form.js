@@ -25,6 +25,31 @@ export const useReg = () => {
       .min(6)
       .max(10)
   )
+  const {
+    value: firstName,
+    errorMessage: fnError,
+    handleBlur: fnBlur
+  } = useField(
+    'firstName',
+    yup
+      .string()
+      .trim()
+      .required()
+      .min(2)
+  )
+  const {
+    value: lastName,
+    errorMessage: lnError,
+    handleBlur: lnBlur
+  } = useField(
+    'lastName',
+    yup
+      .string()
+      .trim()
+      .required()
+      .min(2)
+  )
+  const { value: agree } = useField('agree', yup.boolean().required())
 
   const onSubmit = handleSubmit(async values => {
     try {
@@ -51,11 +76,18 @@ export const useReg = () => {
   })
 
   return {
+    agree,
     email,
     password,
+    firstName,
+    lastName,
     eError,
     pError,
+    fnError,
+    lnError,
     eBlur,
+    fnBlur,
+    lnBlur,
     pBlur,
     onSubmit,
     isSubmitting,

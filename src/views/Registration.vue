@@ -8,31 +8,63 @@
 
     <div class="form-control">
       <div class="input-wrapper">
-        <div class="email">
-          <label for="email">Email</label>
-          <input
-            :class="['myInput', { invalid: eError }]"
-            type="email"
-            id="email"
-            v-model="email"
-            @blur="eBlur"
-          />
-          <small class="error-message" v-if="eError">{{ eError }}</small>
+        <div class="name-wrapper">
+          <div class="first-name">
+            <label for="firstName">First Name</label>
+            <input
+              :class="['myInput', { invalid: fnError }]"
+              type="text"
+              id="firstName"
+              v-model="firstName"
+              @blur="fnBlur"
+            />
+            <small class="error-message" v-if="fnError">{{ fnError }}</small>
+          </div>
+
+          <div class="last-name">
+            <label for="lastName">Last Name</label>
+            <input
+              :class="['myInput', { invalid: lnError }]"
+              type="text"
+              id="lastName"
+              v-model="lastName"
+              @blur="lnBlur"
+            />
+            <small class="error-message" v-if="lnError">{{ lnError }}</small>
+          </div>
         </div>
-        <div class="password">
-          <label for="password">Password</label>
-          <input
-            :class="['myInput', { invalid: pError }]"
-            type="text"
-            id="password"
-            v-model="password"
-            @blur="pBlur"
-          />
-          <small class="error-message" v-if="pError">{{ pError }}</small>
+        <div class="data-wrapper">
+          <div class="email">
+            <label for="email">Email</label>
+            <input
+              :class="['myInput', { invalid: eError }]"
+              type="email"
+              id="email"
+              v-model="email"
+              @blur="eBlur"
+            />
+            <small class="error-message" v-if="eError">{{ eError }}</small>
+          </div>
+
+          <div class="password">
+            <label for="password">Password</label>
+            <input
+              :class="['myInput', { invalid: pError }]"
+              type="text"
+              id="password"
+              v-model="password"
+              @blur="pBlur"
+            />
+            <small class="error-message" v-if="pError">{{ pError }}</small>
+          </div>
         </div>
       </div>
+
       <div class="footer-wrapper">
-        <div class="info-text">Lorem ipsum dolor sit amet consectetur.</div>
+        <label>
+          <input type="checkbox" v-model="agree" />
+          <span>I entered the correct data and remembered it.</span>
+        </label>
         <button
           class="button"
           type="submit"
@@ -89,7 +121,7 @@ export default {
   .text {
     font-weight: 400;
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     .reg {
       color: #5db678;
       margin: 0;
@@ -100,13 +132,23 @@ export default {
 
   .form-control {
     .input-wrapper {
-      display: flex;
-      align-items: center;
-      .email {
+      .name-wrapper,
+      .data-wrapper {
+        display: flex;
+        align-items: center;
+      }
+      .name-wrapper {
+        margin-bottom: 20px;
+      }
+
+      .email,
+      .first-name {
         margin-right: 10px;
       }
       .email,
-      .password {
+      .password,
+      .first-name,
+      .last-name {
         position: relative;
         display: flex;
         flex-direction: column;
