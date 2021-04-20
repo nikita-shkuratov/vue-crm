@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import AppLoader from '../../components/ui/AppLoader.vue'
 import { useStore } from 'vuex'
 import { useRecordForm } from '../../helpers/record.form'
@@ -101,14 +101,14 @@ export default {
     const categories = ref([])
     const category = ref(null)
     const type = ref('outcome')
-    const amount = ref(1)
+    /* const amount = ref(1) */
     const description = ref('')
     const myBill = ref(null)
 
     onMounted(async () => {
       store.dispatch('category/fetchCategories')
       categories.value = store.getters['category/getCategories']
-      myBill.value = store.getters.getMyBill
+      myBill.value = store.getters.getUser.bill
       loading.value = false
       if (categories.value.length) {
         category.value = categories.value[0].id
@@ -122,37 +122,28 @@ export default {
       }, 0)
     })
 
-    const canCreateRecord = computed(() => {
-      if (type.value === 'income') {
-        return true
-      }
-      return myBill.value >= amount.value
-    })
-
     const submit = async values => {
       const { amount, description, type } = values
+      const checkBill = type === 'income' ? true : myBill.value >= amount
 
-      if (canCreateRecord.value) {
+      if (checkBill) {
         try {
           await store.dispatch('record/createRecord', {
-            categoryId: category.value,
             amount,
             description,
             type,
             date: new Date().toJSON()
           })
 
-          /* const bill =
-            values.type === 'income'
-              ? myBill.value + values.amount
-              : myBill.value - values.amount
-
-          await store.dispatch('updateMyBill', { bill }) */
+          const bill =
+            type === 'income' ? myBill.value + amount : myBill.value - amount
+          await store.dispatch('updateMyBill', bill)
         } catch (e) {}
       } else {
-        console.log(
-          `Недостаточно средств на счете (${amount.value - myBill.value})`
-        )
+        store.dispatch('setMessage', {
+          value: `Insufficient funds in the account (${amount - myBill.value})`,
+          type: true
+        })
       }
     }
 
@@ -169,7 +160,7 @@ export default {
       categories,
       category,
       type,
-      amount,
+      /* amount, */
       description,
       ...useRecordForm(submit)
     }

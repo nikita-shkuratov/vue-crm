@@ -22,12 +22,22 @@ export default {
     async createCategory ({ commit }, payload) {
       try {
         const token = store.getters['auth/token']
-        const { id } = store.getters.getUser
-        const { data } = await axios.post(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories.json?auth=${token}`,
+        const user = store.getters.getUser
+        const response = await axios.post(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}/categories.json?auth=${token}`,
           payload
         )
-        commit('addCategory', { ...payload, id: data.name })
+        const { data } = await axios.patch(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}/categories/${response.data.name}.json?auth=${token}`,
+          {
+            id: response.data.name
+          }
+        )
+        commit('addCategory', { data })
+        store.dispatch('setMessage', {
+          value: 'The category was created successfully.',
+          type: true
+        })
       } catch (e) {
         console.log(e)
       }
@@ -41,6 +51,7 @@ export default {
         )
         const requests = Object.keys(data).map(id => ({ ...data[id], id }))
         commit('setCategories', requests)
+        return requests
       } catch (e) {
         console.log(e)
       }

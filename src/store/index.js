@@ -9,22 +9,17 @@ import record from './modules/record.module'
 export default createStore({
   state () {
     return {
-      message: null,
       sidebar: false,
       user: {},
-      bill: null,
-      myBill: 10000
+      currencies: null
     }
   },
   mutations: {
-    setMessage (state, message) {
-      state.message = message
-    },
     setUser (state, userData) {
       state.user = userData
     },
-    setBill (state, billData) {
-      state.bill = billData
+    setСurrencies (state, currenciesData) {
+      state.currencies = currenciesData
     },
     clearMessage (state) {
       state.message = null
@@ -38,19 +33,41 @@ export default createStore({
   },
 
   actions: {
-    setMessage ({ commit }, message) {
-      commit('setMessage', message)
-      setTimeout(() => {
-        commit('clearMessage')
-      }, 2000)
+    setMessage (_, message) {
+      if (!message.type) {
+        // eslint-disable-next-line
+        M.toast({ html: `Warning: ${message.value}` })
+      } else {
+        // eslint-disable-next-line
+        M.toast({ html: message.value })
+      }
     },
     async fetchCurrency ({ commit }) {
       const key = 'c2b1b5b18e71531c830cbd725569fcc0'
-      const { data } = await axios.get(
-        `http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
-      )
-      commit('setBill', data)
-      return data
+      try {
+        const { data } = await axios.get(
+          `http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
+        )
+        commit('setСurrencies', data)
+        return data
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async updateMyBill ({ commit, state, rootState }, payload) {
+      const user = state.user
+      const token = rootState.auth.token
+      try {
+        const {
+          data
+        } = await axios.patch(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}.json?auth=${token}`,
+          { bill: payload }
+        )
+        commit('setUser', data)
+      } catch (e) {
+        console.log(e)
+      }
     }
   },
 
@@ -66,11 +83,8 @@ export default createStore({
     getUser (state) {
       return state.user
     },
-    getBill (state) {
-      return state.bill
-    },
-    getMyBill (state) {
-      return state.myBill
+    getСurrencies (state) {
+      return state.currencies
     }
   }
 })

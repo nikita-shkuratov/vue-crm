@@ -90,7 +90,7 @@ export default {
     if (route.query.message) {
       store.dispatch('setMessage', {
         value: error(route.query.message),
-        type: 'danger'
+        type: false
       })
     }
     return { ...useReg() }

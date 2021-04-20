@@ -69,7 +69,7 @@ export const useReg = () => {
       store.dispatch('setMessage', {
         value:
           'You often press enter, make sure everything is correct and try again in 20 seconds.',
-        type: 'danger'
+        type: false
       })
       setTimeout(() => (submitCount.value = 0), 20000)
     }

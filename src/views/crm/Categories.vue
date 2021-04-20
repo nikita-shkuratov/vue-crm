@@ -13,7 +13,7 @@
           :key="categories.length + updateCount"
           @updated="updateCategories"
         />
-        <p v-else class="center">Категорий пока нет</p>
+        <p v-else class="center">There are no categories yet.</p>
       </div>
     </section>
   </div>
@@ -43,6 +43,7 @@ export default {
       loading.value = true
       store.dispatch('category/fetchCategories')
       categories.value = store.getters['category/getCategories']
+      console.log(categories.value)
       loading.value = false
     })
 

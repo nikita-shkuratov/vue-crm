@@ -23,10 +23,10 @@ export default {
 
   computed: {
     base () {
-      const userBill = 10000 // ned to do
-      const rub = this.$store.getters.getBill.rates.RUB
-      const eur = this.$store.getters.getBill.rates.EUR
-      return userBill / (rub / eur)
+      const { bill } = this.$store.getters.getUser
+      const rub = this.$store.getters.getСurrencies.rates.RUB
+      const eur = this.$store.getters.getСurrencies.rates.EUR
+      return bill / (rub / eur)
     }
   },
   methods: {

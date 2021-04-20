@@ -6,22 +6,22 @@ import { error } from '../../helpers/error'
 export default {
   namespaced: true,
   state () {
-    return { token: localStorage.getItem('jwt-token') || null }
+    return { token: sessionStorage.getItem('jwt-token') || null }
   },
 
   mutations: {
     setToken (state, token) {
       state.token = token
-      localStorage.setItem('jwt-token', token)
+      sessionStorage.setItem('jwt-token', token)
     },
     logout (state) {
       state.token = null
-      localStorage.removeItem('jwt-token')
+      sessionStorage.removeItem('jwt-token')
     }
   },
 
   actions: {
-    async login ({ commit, dispatch }, payload) {
+    async login ({ commit }, payload) {
       try {
         const { data } = await axios.post(constants.AUTH_USER, payload)
         commit('setToken', data.idToken)
@@ -34,13 +34,12 @@ export default {
         )[0]
         store.commit('setUser', user)
       } catch (e) {
-        dispatch(
+        store.dispatch(
           'setMessage',
           {
             value: error(e.response.data.error.message),
-            type: 'danger'
-          },
-          { root: true }
+            type: false
+          }
         )
         throw new Error()
       }
