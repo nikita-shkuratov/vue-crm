@@ -40,28 +40,25 @@ export default {
     const updateCount = ref(0)
 
     onMounted(async () => {
-      loading.value = true
-      store.dispatch('category/fetchCategories')
-      categories.value = store.getters['category/getCategories']
-      console.log(categories.value)
+      categories.value = await store.dispatch('category/fetchCategories')
       loading.value = false
     })
 
     const addNewCategory = category => categories.value.push(category)
 
-    /*     const updateCategories = category => {
+    const updateCategories = category => {
       const idx = categories.value.findIndex(c => c.id === category.id)
-      categories[idx].title = category.title
-      categories[idx].limit = category.limit
+      categories.value[idx].title = category.title
+      categories.value[idx].limit = category.limit
       updateCount.value++
-    } */
+    }
 
     return {
       categories,
       loading,
       updateCount,
-      addNewCategory
-      /* updateCategories */
+      addNewCategory,
+      updateCategories
     }
   }
 }

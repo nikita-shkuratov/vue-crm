@@ -64,7 +64,7 @@ export default createStore({
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}.json?auth=${token}`,
           { bill: payload }
         )
-        commit('setUser', data)
+        commit('setUser', { ...user, ...data })
       } catch (e) {
         console.log(e)
       }

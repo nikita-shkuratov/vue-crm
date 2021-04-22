@@ -38,6 +38,7 @@ export default {
           value: 'The category was created successfully.',
           type: true
         })
+        return data
       } catch (e) {
         console.log(e)
       }
@@ -72,10 +73,15 @@ export default {
       try {
         const token = store.getters['auth/token']
         const { id } = store.getters.getUser
-        await axios.put(
+        const { data } = await axios.put(
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories/${payload.id}/.json?auth=${token}`,
           payload
         )
+        store.dispatch('setMessage', {
+          value: 'Category updated successfully.',
+          type: true
+        })
+        return data
       } catch (e) {
         console.log(e)
       }

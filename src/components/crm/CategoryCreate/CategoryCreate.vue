@@ -57,8 +57,8 @@ export default {
   setup (_, { emit }) {
     const store = useStore()
     const submit = async values => {
-      await store.dispatch('category/createCategory', values)
-      emit('created')
+      const category = await store.dispatch('category/createCategory', values)
+      emit('created', category)
     }
     onMounted(async () => {
       // eslint-disable-next-line

@@ -53,12 +53,12 @@ export default {
         )
         const requests = Object.keys(data).map(id => ({ ...data[id], id }))
         commit('setRecord', requests)
+        return requests
       } catch (e) {
         console.log(e)
       }
     },
     async fetchRecordById (_, recordId) {
-      console.log('rr', recordId)
       try {
         const token = store.getters['auth/token']
         const { id } = store.getters.getUser
@@ -70,6 +70,7 @@ export default {
         console.log(e)
       }
     },
+
     async updateRecords (_, payload) {
       try {
         const token = store.getters['auth/token']

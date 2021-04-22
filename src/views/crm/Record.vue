@@ -8,7 +8,7 @@
 
     <p class="center" v-else-if="!categories.length">
       There are no categories yet.
-      <router-link to="/categories">Add a new category</router-link>
+      <router-link to="/crm/categories">Add a new category</router-link>
     </p>
 
     <form class="form" v-else @submit.prevent="onSubmit">
@@ -100,26 +100,21 @@ export default {
     const select = ref(null)
     const categories = ref([])
     const category = ref(null)
-    const type = ref('outcome')
-    /* const amount = ref(1) */
-    const description = ref('')
     const myBill = ref(null)
 
     onMounted(async () => {
-      store.dispatch('category/fetchCategories')
-      categories.value = store.getters['category/getCategories']
+      categories.value = await store.dispatch('category/fetchCategories')
       myBill.value = store.getters.getUser.bill
-      loading.value = false
       if (categories.value.length) {
         category.value = categories.value[0].id
       }
-
       setTimeout(() => {
         // eslint-disable-next-line
         select.value = M.FormSelect.init(select.value)
         // eslint-disable-next-line
         M.updateTextFields()
       }, 0)
+      loading.value = false
     })
 
     const submit = async values => {
@@ -129,6 +124,7 @@ export default {
       if (checkBill) {
         try {
           await store.dispatch('record/createRecord', {
+            categoryId: category.value,
             amount,
             description,
             type,
@@ -137,6 +133,7 @@ export default {
 
           const bill =
             type === 'income' ? myBill.value + amount : myBill.value - amount
+
           await store.dispatch('updateMyBill', bill)
         } catch (e) {}
       } else {
@@ -159,9 +156,6 @@ export default {
       select,
       categories,
       category,
-      type,
-      /* amount, */
-      description,
       ...useRecordForm(submit)
     }
   }

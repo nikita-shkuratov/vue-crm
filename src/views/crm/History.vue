@@ -3,14 +3,11 @@
     <div class="page-title">
       <h3>Record history</h3>
     </div>
-
     <app-loader v-if="loading" />
-
     <p class="center" v-else-if="!records.length">
-      Записей пока нет.
-      <router-link to="/record">Добавьте первую</router-link>
+      There are no records yet.
+      <router-link to="/crm/record">Add the first one</router-link>
     </p>
-
     <section v-else>
       <history-table :records="records" />
     </section>
@@ -36,11 +33,7 @@ export default {
     const records = ref([])
 
     onMounted(async () => {
-      store.dispatch('record/fetchRecords')
-      records.value = store.getters['record/getRecords']
-      console.log(records.value)
-      store.dispatch('category/fetchCategories')
-
+      records.value = await store.dispatch('record/fetchRecords')
       loading.value = false
     })
 
