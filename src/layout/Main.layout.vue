@@ -5,10 +5,7 @@
 </template>
 
 <script>
-
-export default {
-
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>
@@ -17,7 +14,7 @@ export default {
   width: 100vw;
   height: 100vh;
   display: flex;
-    flex-direction: column;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 </style>

@@ -28,7 +28,7 @@ const routes = [
     name: 'Registration',
     component: () => import('../views/Registration.vue'),
     meta: {
-      layout: 'reg',
+      layout: 'auth',
       auth: false
     }
   },

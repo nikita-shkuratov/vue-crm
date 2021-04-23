@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="auth_wrapper">
     <router-view />
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.wrapper {
+.auth_wrapper {
   width: 100vw;
   height: 100vh;
   display: flex;
