@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import QuestionItem from '../../components/bank/question/QuestionItem.vue'
+import QuestionItem from '../../components/bank/QuestionItem'
 import AppPage from '../../components/ui/AppPage.vue'
 
 export default {

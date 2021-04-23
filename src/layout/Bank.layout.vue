@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import TheNavBar from '../components/bank/TheNavBar/TheNavBar'
-import TheSidebar from '../components/bank/TheSideBar/TheSidebar.vue'
+import TheNavBar from '../components/bank/TheBankNavbar'
+import TheSidebar from '../components/bank/TheBankSideBar'
 
 export default {
   components: { TheNavBar, TheSidebar }

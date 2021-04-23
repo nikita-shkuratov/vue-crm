@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import CrmBill from '../../components/crm/CrmBill/CrmBill'
-import HomeCurrency from '../../components/crm/CrmCurrency/CrmCurrency'
+import CrmBill from '../../components/crm/CrmBill'
+import HomeCurrency from '../../components/crm/CrmCurrency'
 import AppLoader from '../../components/ui/AppLoader.vue'
 
 export default {

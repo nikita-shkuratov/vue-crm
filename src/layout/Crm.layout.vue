@@ -18,8 +18,8 @@
 
 <script>
 import { ref } from 'vue'
-import TheCrmNavbar from '../components/crm/TheCrmNavbar/TheCrmNavbar.vue'
-import TheCrmSideBar from '../components/crm/TheCrmSideBar/TheCrmSideBar.vue'
+import TheCrmNavbar from '../components/crm/TheCrmNavbar'
+import TheCrmSideBar from '../components/crm/TheCrmSideBar'
 export default {
   components: { TheCrmNavbar, TheCrmSideBar },
   setup () {
