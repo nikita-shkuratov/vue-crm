@@ -22,9 +22,7 @@ export default {}
 
 <style scoped lang="css">
 .app-loader{
-  width: 100vh;
-  height: 100vh;
-  position:absolute;
+/* todo */
 }
 .preloader-wrapper{
   position: absolute;

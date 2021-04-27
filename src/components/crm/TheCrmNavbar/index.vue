@@ -1,11 +1,12 @@
 <template>
-  <nav class="navbar orange lighten-1">
+  <nav class="navbar">
     <div class="nav-wrapper">
-      <div class="navbar-left">
+
+      <div class="side__bar">
         <a href="#" @click.prevent="$emit('showSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ filter(date) }}</span>
+        <span class="side__bar_time">{{ filter(date) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -86,3 +87,27 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.navbar {
+  font-family: 'Didact Gothic', sans-serif;
+  background: linear-gradient(178.57deg, #B65D9B 0%, #d46fd4 100%);
+  box-shadow: 0px 4px 26px rgba(182, 93, 178, 0.5);
+  border-radius: 0px 25px 0px 25px;
+  padding: 10px 20px;
+}
+.nav-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color:#ffffff;
+}
+.side__bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.side__bar_time{
+  margin-left: 15px;
+}
+</style>

@@ -1,12 +1,18 @@
 <template>
   <app-dropdown-settings></app-dropdown-settings>
   <div class="card-block">
-    <div class="card crm">
-      <router-link class="link-title" to="/crm">CRM</router-link>
-    </div>
-    <div class="card">
-      <router-link class="link-title" to="/bank">Online Bank</router-link>
-    </div>
+    <router-link to="/crm">
+      <div class="card crm">
+        <h3>CRM</h3>
+        <i class="large material-icons">business_center</i>
+      </div></router-link
+    >
+    <router-link to="/bank">
+      <div class="card">
+        <h3>Online Bank</h3>
+        <i class="large material-icons">account_balance</i>
+      </div></router-link
+    >
   </div>
 </template>
 
@@ -34,17 +40,20 @@ export default {
     border-radius: 25px 0px 25px 0px;
     padding: 10px 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    &.crm {
-      box-shadow: 0px 4px 26px rgba(182, 93, 178, 0.5);
-    }
+    align-items: center;
+    color: #333333;
 
-    .link-title {
-      text-decoration: none;
+    h3 {
+      margin: 0;
+      margin-bottom: 40px;
       font-family: 'Didact Gothic', sans-serif;
       font-weight: 400;
       font-size: 25px;
-      color: #333333;
+    }
+    &.crm {
+      box-shadow: 0px 4px 26px rgba(182, 93, 178, 0.5);
     }
   }
 }

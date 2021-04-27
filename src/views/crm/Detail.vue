@@ -6,10 +6,7 @@
     <app-loader v-if="loading" />
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
-        <router-link to="/crm/history" class="breadcrumb">History</router-link>
-        <a @click.prevent class="breadcrumb">
-          {{ record.type === 'income' ? 'Income' : 'Outcome' }}
-        </a>
+ {{ record.type === 'income' ? 'Income' : 'Outcome' }}
       </div>
       <div class="row">
         <div class="col s12 m6">
