@@ -1,7 +1,7 @@
 <template>
   <div class="app-loader">
     <div class="preloader-wrapper big active">
-      <div class="spinner-layer spinner-green-only">
+      <div class="spinner-layer spinner-color-only">
         <div class="circle-clipper left">
           <div class="circle"></div>
         </div>
@@ -20,9 +20,11 @@
 export default {}
 </script>
 
-<style scoped lang="css">
+<style scoped lang="scss">
 .app-loader{
-/* todo */
+position: absolute;
+.spinner-layer{
+border-color:#B65D9B}
 }
 .preloader-wrapper{
   position: absolute;

@@ -6,7 +6,7 @@
     <app-loader v-if="loading" />
     <div v-else-if="record">
       <div class="breadcrumb-wrap">
- {{ record.type === 'income' ? 'Income' : 'Outcome' }}
+        {{ record.type === 'income' ? 'Income' : 'Outcome' }}
       </div>
       <div class="row">
         <div class="col s12 m6">
@@ -21,7 +21,7 @@
               <p>Category: {{ record.categoryName }}</p>
               <p>Description: {{ record.description }}</p>
               <p>Amount: {{ record.amount }}</p>
-              <small>{{ record.date }}</small>
+              <small>{{ filter(record.date) }}</small>
             </div>
           </div>
         </div>
@@ -47,24 +47,27 @@ export default {
     const record = ref(null)
     const route = useRoute()
 
+    const filter = value => {
+      const options = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }
+      /*       const locale = store.getters.info.locale || 'ru-RU' */
+      const locale = 'en-US'
+      return new Intl.DateTimeFormat(locale, options).format(new Date(value))
+    }
+
     onMounted(async () => {
       const id = route.params.id
       record.value = await store.dispatch('record/fetchRecordById', id)
-      const category = await store.dispatch(
-        'category/fetchCategoryById',
-        record.value.categoryId
-      )
-
-      record.value = {
-        ...record.value,
-        categoryName: category.title
-      }
       loading.value = false
     })
 
     return {
       record,
-      loading
+      loading,
+      filter
     }
   }
 }

@@ -8,7 +8,7 @@ const locales = {
 }
 
 export default function localizeFilter (key) {
-  const locale = 'ru-RU'
+  const locale = 'en-US'
   return locales[locale][key] || `[Localize error]: key ${key} not found`
 }
 

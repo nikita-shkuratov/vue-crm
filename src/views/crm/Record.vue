@@ -96,18 +96,15 @@ export default {
   setup () {
     const store = useStore()
     const loading = ref(true)
-    const selectData = ref('')
     const select = ref(null)
     const categories = ref([])
     const category = ref(null)
     const myBill = ref(null)
 
     onMounted(async () => {
-      categories.value = await store.dispatch('category/fetchCategories')
+      categories.value = await store.dispatch('category/fetchCategories') || []
       myBill.value = store.getters.getUser.bill
-      if (categories.value.length) {
-        category.value = categories.value[0].id
-      }
+
       setTimeout(() => {
         // eslint-disable-next-line
         select.value = M.FormSelect.init(select.value)
@@ -120,11 +117,14 @@ export default {
     const submit = async values => {
       const { amount, description, type } = values
       const checkBill = type === 'income' ? true : myBill.value >= amount
-
+      const categoryName = categories.value.filter(
+        cat => cat.id === category.value
+      )[0].title
       if (checkBill) {
         try {
           await store.dispatch('record/createRecord', {
             categoryId: category.value,
+            categoryName,
             amount,
             description,
             type,
@@ -152,7 +152,6 @@ export default {
 
     return {
       loading,
-      selectData,
       select,
       categories,
       category,

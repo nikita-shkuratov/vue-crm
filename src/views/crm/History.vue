@@ -33,7 +33,7 @@ export default {
     const records = ref([])
 
     onMounted(async () => {
-      records.value = await store.dispatch('record/fetchRecords')
+      records.value = await store.dispatch('record/fetchRecords') || []
       loading.value = false
     })
 

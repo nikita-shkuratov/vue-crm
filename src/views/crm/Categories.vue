@@ -40,11 +40,13 @@ export default {
     const updateCount = ref(0)
 
     onMounted(async () => {
-      categories.value = await store.dispatch('category/fetchCategories')
+      categories.value = await store.dispatch('category/fetchCategories') || []
       loading.value = false
     })
 
-    const addNewCategory = category => categories.value.push(category)
+    const addNewCategory = category => {
+      categories.value.push(category)
+    }
 
     const updateCategories = category => {
       const idx = categories.value.findIndex(c => c.id === category.id)

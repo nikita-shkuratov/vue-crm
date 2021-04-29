@@ -51,9 +51,13 @@ export default {
         const { data } = await axios.get(
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/records.json?auth=${token}`
         )
-        const requests = Object.keys(data).map(id => ({ ...data[id], id }))
-        commit('setRecord', requests)
-        return requests
+        if (data) {
+          const requests = Object.keys(data).map(id => ({ ...data[id], id }))
+          commit('setRecord', requests)
+          return requests
+        } else {
+          return false
+        }
       } catch (e) {
         console.log(e)
       }
