@@ -11,7 +11,7 @@
         <div class="email">
           <label for="email">Email</label>
           <input
-            :class="['myInput', { invalid: eError }]"
+            :class="['input-auth', { invalid: eError }]"
             type="email"
             id="email"
             v-model="email"
@@ -22,7 +22,7 @@
         <div class="password">
           <label for="password">Password</label>
           <input
-            :class="['myInput', { invalid: pError }]"
+            :class="['input-auth', { invalid: pError }]"
             type="password"
             id="password"
             v-model="password"
@@ -65,7 +65,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '../assets/auth.scss';
-</style>

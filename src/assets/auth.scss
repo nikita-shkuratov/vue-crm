@@ -1,3 +1,4 @@
+@import '~materialize-css/dist/css/materialize.min.css';
 .auth__container,
 .reg__container {
   background: #ffffff;
@@ -80,7 +81,7 @@
           left: 20px;
           color: #d40d1e;
         }
-        .myInput {
+        .input-auth {
           margin-top: 10px;
           background: #ffffff;
           border: 1px solid #b7c3d6;
@@ -140,7 +141,7 @@
           left: 20px;
           color: #d40d1e;
         }
-        .myInput {
+        .input-auth {
           margin-top: 10px;
           background: #ffffff;
           border: 1px solid #b7c3d6;

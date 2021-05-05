@@ -49,6 +49,7 @@
       <small class="error-message" v-if="typeError">{{ typeError }}</small>
 
       <div class="input-field">
+         <label for="amount">Summ</label>
         <input
           id="amount"
           type="number"
@@ -56,13 +57,13 @@
           :class="['myInput', { invalid: amountError }]"
           @blur="amountBlur"
         />
-        <label for="amount">Summ</label>
         <small class="error-message" v-if="amountError">{{
           amountError
         }}</small>
       </div>
 
       <div class="input-field">
+        <label for="description">Description</label>
         <input
           id="description"
           type="text"
@@ -70,7 +71,6 @@
           :class="['myInput', { invalid: descriptionError }]"
           @blur="titleBlur"
         />
-        <label for="description">Description</label>
         <small class="error-message" v-if="descriptionError">{{
           descriptionError
         }}</small>
@@ -130,10 +130,8 @@ export default {
             type,
             date: new Date().toJSON()
           })
-
           const bill =
             type === 'income' ? myBill.value + amount : myBill.value - amount
-
           await store.dispatch('updateMyBill', bill)
         } catch (e) {}
       } else {

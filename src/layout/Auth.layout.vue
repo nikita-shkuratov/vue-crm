@@ -10,7 +10,7 @@ export default {
 
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .auth_wrapper {
   width: 100vw;
   height: 100vh;
@@ -19,4 +19,5 @@ export default {
   align-items: center;
   overflow: hidden;
 }
+@import '../assets/auth.scss';
 </style>

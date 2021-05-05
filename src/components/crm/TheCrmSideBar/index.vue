@@ -17,9 +17,13 @@
     </router-link>
   </ul>
 </template>
+<li>
+        <router-link to="/bank"
+         custom v-slot="{href, navigate}">
+         <a @click="navigate" :class="{active: $route.path.indexOf(href) != -1}" href="#"> Requests</a></router-link>
+      </li>
 
 <script>
-/* import localizeFilter from '../../../helpers/filters/localizeFilter/localizeFilter' */
 
 export default {
   props: ['open'],
@@ -30,7 +34,7 @@ export default {
       { title: 'Bill', url: '/crm', exact: true },
       { title: 'History', url: '/crm/history' },
       { title: 'Planning', url: '/crm/planing' },
-      { title: 'NewRecord', url: '/crm/record' },
+      { title: 'New entry', url: '/crm/record' },
       { title: 'Categories', url: '/crm/categories' }
     ]
     return {
@@ -45,6 +49,8 @@ export default {
 .sidenav {
   .active > li > a {
     background: linear-gradient(178.57deg, #b65d9b 0%, #d46fd4 100%);
+    color:#ffffff;
+    font-size: 16px;
   }
 }
 .navbar {

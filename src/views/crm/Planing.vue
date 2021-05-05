@@ -55,7 +55,7 @@ export default {
     onMounted(async () => {
       myBill.value = store.getters.getMyBill
 
-      const records = await store.dispatch('record/fetchRecords')
+      const records = await store.dispatch('record/fetchRecords') || []
       const categoires = await store.dispatch('category/fetchCategories') || []
 
       categories.value = categoires.map(cat => {

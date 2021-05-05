@@ -1,3 +1,6 @@
+@import '~materialize-css/dist/css/materialize.min.css';
+
+
 *{
   font-family: 'Didact Gothic', sans-serif;
 }
@@ -64,7 +67,7 @@
   -ms-flex-align: center;
   align-items: center;
   padding-bottom: 1rem;
-  border-bottom: solid 1px rgba(255, 0, 0, 0.12);
+  border-bottom: solid 1px rgba(0,0,0,0.12);
 }
 .page-title a {
   color: #000;
@@ -131,4 +134,47 @@
 .history-chart {
   max-width: 600px;
   margin: 0 auto;
+}
+
+input {
+  margin: 0 !important;
+}
+.error-message {
+  color: #d40d1e;
+}
+.myInput {
+  &:focus {
+    border-bottom: 1px solid #b65d9b !important;
+    box-shadow: 0px 1px 0px 0px rgba(182, 93, 178, 0.5) !important;
+  }
+}
+.btn {
+  background: linear-gradient(178.57deg, #b65d9b 0%, #d46fd4 100%);
+}
+
+.input-field > label {
+  &.active {
+    color: #b65d9b;
+  }
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:after {
+  background-color: #b65d9b;
+}
+
+[type='radio']:checked + span:after,
+[type='radio'].with-gap:checked + span:before,
+[type='radio'].with-gap:checked + span:after {
+  border: 2px solid #b65d9b;
+}
+
+input.select-dropdown {
+  &:focus {
+    border-bottom: 1px solid #b65d9b !important;
+  }
+}
+
+.dropdown-content li > span {
+  color: #b65d9b !important;
 }

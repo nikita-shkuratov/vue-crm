@@ -4,7 +4,7 @@
 
       <div class="side__bar">
         <a href="#" @click.prevent="$emit('showSidebar')">
-          <i class="material-icons black-text">dehaze</i>
+          <i class="material-icons">dehaze</i>
         </a>
         <span class="side__bar_time">{{ filter(date) }}</span>
       </div>
@@ -12,7 +12,7 @@
       <ul class="right hide-on-small-and-down">
         <li>
           <a
-            class="dropdown-trigger black-text"
+            class="dropdown-trigger"
             href="#"
             data-target="dropdown"
             ref="dropdown"
