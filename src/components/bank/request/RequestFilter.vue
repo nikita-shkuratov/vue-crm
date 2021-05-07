@@ -2,14 +2,15 @@
   <div class="filter">
     <div class="form-control">
       <input
-        class="myInput"
+        class="bankInput"
         type="text"
         placeholder="Please enter name"
         v-model="name"
       />
     </div>
+
     <div class="form-control">
-      <select v-model="status" class="myInput">
+      <select v-model="status" class="bankInput">
         <option disabled selected>Select a status</option>
         <option value="done">Done</option>
         <option value="canceled">Canceled</option>
@@ -57,28 +58,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.myInput {
-  background: #ffffff;
-  border: 1px solid #b7c3d6;
-  box-sizing: border-box;
-  border-radius: 40px;
-  height: 50px;
-  padding: 0px 20px;
+.bankInput {
+  background: #ffffff !important;
+  border: 1px solid #b7c3d6 !important;
+  box-sizing: border-box !important;
+  border-radius: 40px !important;
+  height: 50px !important;
+  padding: 0px 20px !important;
 
   &:focus {
-    outline: none;
-    border: 1px solid #5db678;
-    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
-    box-sizing: border-box;
-    border-radius: 40px;
-    height: 50px;
+    outline: none !important;
+    border: 1px solid #5db678 !important;
+    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5) !important;
+    box-sizing: border-box !important;
+    border-radius: 40px !important;
+    height: 50px !important;
   }
 }
 
 .filter {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 .form-control {
   margin-left: 10px;
@@ -103,5 +104,8 @@ export default {
     border: 1px solid #ffffff;
     box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
   }
+}
+select {
+  display: block !important;
 }
 </style>

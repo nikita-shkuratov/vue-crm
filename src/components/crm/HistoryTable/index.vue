@@ -24,7 +24,7 @@
           <button
             v-tooltip="'View the recording'"
             class="btn-small btn"
-            @click="$router.push('/crm/detail/' + record.id)"
+            @click="$router.push('/crm/history/detail/' + record.id)"
           >
             <i class="material-icons">open_in_new</i>
           </button>
@@ -48,7 +48,6 @@ export default {
         month: 'long',
         year: 'numeric'
       }
-      /*       const locale = store.getters.info.locale || 'ru-RU' */
       const locale = 'en-US'
       return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }

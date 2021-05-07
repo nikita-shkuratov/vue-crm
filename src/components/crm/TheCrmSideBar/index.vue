@@ -5,26 +5,22 @@
       :key="link.url"
       :to="link.url"
       :exact="link.exact"
+      :class="{active:$route.path.includes(link.url) && link.title !== 'Bill' }"
     >
       <li>
         <a
           href="#"
-          class="waves-effect waves-orange pointer"
+          class="waves-effect waves-light pointer"
           @click="clickLink(link.title, link.url)"
-          >{{ link.title }}</a
+          >{{ link.title}}  </a
         >
       </li>
     </router-link>
   </ul>
+
 </template>
-<li>
-        <router-link to="/bank"
-         custom v-slot="{href, navigate}">
-         <a @click="navigate" :class="{active: $route.path.indexOf(href) != -1}" href="#"> Requests</a></router-link>
-      </li>
 
 <script>
-
 export default {
   props: ['open'],
   emits: ['click-link'],
