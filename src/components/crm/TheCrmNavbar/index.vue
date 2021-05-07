@@ -1,17 +1,18 @@
 <template>
-  <nav class="navbar orange lighten-1">
+  <nav class="navbar">
     <div class="nav-wrapper">
-      <div class="navbar-left">
+
+      <div class="side__bar">
         <a href="#" @click.prevent="$emit('showSidebar')">
-          <i class="material-icons black-text">dehaze</i>
+          <i class="material-icons">dehaze</i>
         </a>
-        <span class="black-text">{{ filter(date) }}</span>
+        <span class="side__bar_time">{{ filter(date) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
           <a
-            class="dropdown-trigger black-text"
+            class="dropdown-trigger"
             href="#"
             data-target="dropdown"
             ref="dropdown"
@@ -23,13 +24,13 @@
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link to="/crm/profile" class="black-text">
-                <i class="material-icons">account_circle</i>Профиль
+                <i class="material-icons">account_circle</i>Profile
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logout">
-                <i class="material-icons">assignment_return</i>Выйти
+                <i class="material-icons">assignment_return</i>Exit
               </a>
             </li>
           </ul>
@@ -86,3 +87,27 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+.navbar {
+  font-family: 'Didact Gothic', sans-serif;
+  background: linear-gradient(178.57deg, #B65D9B 0%, #d46fd4 100%);
+  box-shadow: 0px 4px 26px rgba(182, 93, 178, 0.5);
+  border-radius: 0px 25px 0px 25px;
+  padding: 10px 20px;
+}
+.nav-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color:#ffffff;
+}
+.side__bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.side__bar_time{
+  margin-left: 15px;
+}
+</style>

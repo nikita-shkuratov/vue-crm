@@ -8,7 +8,7 @@
 
     <p class="center" v-else-if="!categories.length">
       There are no categories yet.
-      <router-link to="/categories">Add a new category</router-link>
+      <router-link to="/crm/categories">Add a new category</router-link>
     </p>
 
     <form class="form" v-else @submit.prevent="onSubmit">
@@ -49,6 +49,7 @@
       <small class="error-message" v-if="typeError">{{ typeError }}</small>
 
       <div class="input-field">
+         <label for="amount">Summ</label>
         <input
           id="amount"
           type="number"
@@ -56,13 +57,13 @@
           :class="['myInput', { invalid: amountError }]"
           @blur="amountBlur"
         />
-        <label for="amount">Summ</label>
         <small class="error-message" v-if="amountError">{{
           amountError
         }}</small>
       </div>
 
       <div class="input-field">
+        <label for="description">Description</label>
         <input
           id="description"
           type="text"
@@ -70,7 +71,6 @@
           :class="['myInput', { invalid: descriptionError }]"
           @blur="titleBlur"
         />
-        <label for="description">Description</label>
         <small class="error-message" v-if="descriptionError">{{
           descriptionError
         }}</small>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import AppLoader from '../../components/ui/AppLoader.vue'
 import { useStore } from 'vuex'
 import { useRecordForm } from '../../helpers/record.form'
@@ -96,23 +96,14 @@ export default {
   setup () {
     const store = useStore()
     const loading = ref(true)
-    const selectData = ref('')
     const select = ref(null)
     const categories = ref([])
     const category = ref(null)
-    const type = ref('outcome')
-    const amount = ref(1)
-    const description = ref('')
     const myBill = ref(null)
 
     onMounted(async () => {
-      store.dispatch('category/fetchCategories')
-      categories.value = store.getters['category/getCategories']
-      myBill.value = store.getters.getMyBill
-      loading.value = false
-      if (categories.value.length) {
-        category.value = categories.value[0].id
-      }
+      categories.value = await store.dispatch('category/fetchCategories') || []
+      myBill.value = store.getters.getUser.bill
 
       setTimeout(() => {
         // eslint-disable-next-line
@@ -120,39 +111,34 @@ export default {
         // eslint-disable-next-line
         M.updateTextFields()
       }, 0)
-    })
-
-    const canCreateRecord = computed(() => {
-      if (type.value === 'income') {
-        return true
-      }
-      return myBill.value >= amount.value
+      loading.value = false
     })
 
     const submit = async values => {
       const { amount, description, type } = values
-
-      if (canCreateRecord.value) {
+      const checkBill = type === 'income' ? true : myBill.value >= amount
+      const categoryName = categories.value.filter(
+        cat => cat.id === category.value
+      )[0].title
+      if (checkBill) {
         try {
           await store.dispatch('record/createRecord', {
             categoryId: category.value,
+            categoryName,
             amount,
             description,
             type,
             date: new Date().toJSON()
           })
-
-          /* const bill =
-            values.type === 'income'
-              ? myBill.value + values.amount
-              : myBill.value - values.amount
-
-          await store.dispatch('updateMyBill', { bill }) */
+          const bill =
+            type === 'income' ? myBill.value + amount : myBill.value - amount
+          await store.dispatch('updateMyBill', bill)
         } catch (e) {}
       } else {
-        console.log(
-          `Недостаточно средств на счете (${amount.value - myBill.value})`
-        )
+        store.dispatch('setMessage', {
+          value: `Insufficient funds in the account (${amount - myBill.value})`,
+          type: true
+        })
       }
     }
 
@@ -164,13 +150,9 @@ export default {
 
     return {
       loading,
-      selectData,
       select,
       categories,
       category,
-      type,
-      amount,
-      description,
       ...useRecordForm(submit)
     }
   }

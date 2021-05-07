@@ -47,7 +47,6 @@ export default {
 <style scoped lang="scss">
 .badge {
   width: 80px;
-  height: 20px;
   border: 1px solid #b7c3d6;
   border-radius: 24px;
   padding: 3px;

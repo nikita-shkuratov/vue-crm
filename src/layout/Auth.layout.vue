@@ -1,18 +1,17 @@
 <template>
-  <div class="wrapper">
+  <div class="auth_wrapper">
     <router-view />
-    <app-message></app-message>
   </div>
 </template>
 
 <script>
-import AppMessage from '../components/ui/AppMessage'
+
 export default {
-  components: { AppMessage }
+
 }
 </script>
-<style lang="scss" scoped>
-.wrapper {
+<style lang="scss">
+.auth_wrapper {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -20,4 +19,5 @@ export default {
   align-items: center;
   overflow: hidden;
 }
+@import '../assets/auth.scss';
 </style>

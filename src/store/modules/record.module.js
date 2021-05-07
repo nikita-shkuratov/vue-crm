@@ -23,11 +23,22 @@ export default {
       try {
         const token = store.getters['auth/token']
         const { id } = store.getters.getUser
-        const { data } = await axios.post(
+        const response = await axios.post(
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/records.json?auth=${token}`,
           payload
         )
-        commit('addRecord', { ...payload, id: data.name })
+        const {
+          data
+        } = await axios.patch(
+          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/records/${response.data.name}.json?auth=${token}`,
+          { id: response.data.name }
+        )
+
+        commit('addRecord', { data })
+        store.dispatch('setMessage', {
+          value: 'The record was created successfully.',
+          type: true
+        })
       } catch (e) {
         console.log(e)
       }
@@ -40,14 +51,18 @@ export default {
         const { data } = await axios.get(
           `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/records.json?auth=${token}`
         )
-        const requests = Object.keys(data).map(id => ({ ...data[id], id }))
-        commit('setRecord', requests)
+        if (data) {
+          const requests = Object.keys(data).map(id => ({ ...data[id], id }))
+          commit('setRecord', requests)
+          return requests
+        } else {
+          return false
+        }
       } catch (e) {
         console.log(e)
       }
     },
     async fetchRecordById (_, recordId) {
-      console.log('rr', recordId)
       try {
         const token = store.getters['auth/token']
         const { id } = store.getters.getUser
@@ -59,6 +74,7 @@ export default {
         console.log(e)
       }
     },
+
     async updateRecords (_, payload) {
       try {
         const token = store.getters['auth/token']

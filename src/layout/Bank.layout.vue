@@ -2,7 +2,6 @@
   <div class="wrapper">
     <the-nav-bar></the-nav-bar>
     <the-sidebar></the-sidebar>
-    <app-message class="main-layout-message"></app-message>
     <div class="container">
       <router-view />
     </div>
@@ -10,12 +9,11 @@
 </template>
 
 <script>
-import TheNavBar from '../components/TheNavBar/TheNavBar'
-import TheSidebar from '../components/TheSideBar/TheSidebar.vue'
-import AppMessage from '../components/ui/AppMessage.vue'
+import TheNavBar from '../components/bank/TheBankNavbar'
+import TheSidebar from '../components/bank/TheBankSideBar'
 
 export default {
-  components: { TheNavBar, AppMessage, TheSidebar }
+  components: { TheNavBar, TheSidebar }
 }
 </script>
 
@@ -31,12 +29,8 @@ export default {
 }
 .wrapper {
   position: relative;
-  .main-layout-message {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
 }
 </style>

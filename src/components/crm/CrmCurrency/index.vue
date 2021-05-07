@@ -3,14 +3,14 @@
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
-          <span class="card-title">Курс валют</span>
+          <span class="card-title">Currency exchange rate</span>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+              <th>Currency</th>
+              <th>Rate</th>
+              <th>Date</th>
             </tr>
           </thead>
 
@@ -40,7 +40,7 @@ export default {
         year: 'numeric'
       }
       /*       const locale = store.getters.info.locale || 'ru-RU' */
-      const locale = 'ru-RU'
+      const locale = 'en-US'
       return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }
   }

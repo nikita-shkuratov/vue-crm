@@ -9,14 +9,14 @@
 
     <p class="center" v-else-if="!categories.length">
       There are no categories yet.
-      <router-link to="/categories">Add a new category</router-link>
+      <router-link to="/crm/categories">Add a new category</router-link>
     </p>
 
     <section v-else>
       <div v-for="cat of categories" :key="cat.id">
         <p>
           <strong>{{ cat.title }}:</strong>
-          {{ cat.spend }} из {{ cat.limit }}
+          {{ cat.spend }} of {{ cat.limit }}
         </p>
         <div class="progress" v-tooltip="cat.tooltip">
           <div
@@ -55,11 +55,8 @@ export default {
     onMounted(async () => {
       myBill.value = store.getters.getMyBill
 
-      store.dispatch('record/fetchRecords')
-      const records = store.getters['record/getRecords']
-
-      store.dispatch('category/fetchCategories')
-      const categoires = store.getters['category/getCategories']
+      const records = await store.dispatch('record/fetchRecords') || []
+      const categoires = await store.dispatch('category/fetchCategories') || []
 
       categories.value = categoires.map(cat => {
         const spend = records

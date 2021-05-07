@@ -13,15 +13,15 @@
           :key="categories.length + updateCount"
           @updated="updateCategories"
         />
-        <p v-else class="center">Категорий пока нет</p>
+        <p v-else class="center">There are no categories yet.</p>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import CategoryCreate from '../../components/crm/CategoryCreate/CategoryCreate'
-import CategoryEdit from '../../components/crm/CategoryEdit/CategoryEdit'
+import CategoryCreate from '../../components/crm/CategoryCreate'
+import CategoryEdit from '../../components/crm/CategoryEdit'
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import AppLoader from '../../components/ui/AppLoader.vue'
@@ -40,27 +40,27 @@ export default {
     const updateCount = ref(0)
 
     onMounted(async () => {
-      loading.value = true
-      store.dispatch('category/fetchCategories')
-      categories.value = store.getters['category/getCategories']
+      categories.value = await store.dispatch('category/fetchCategories') || []
       loading.value = false
     })
 
-    const addNewCategory = category => categories.value.push(category)
+    const addNewCategory = category => {
+      categories.value.push(category)
+    }
 
-    /*     const updateCategories = category => {
+    const updateCategories = category => {
       const idx = categories.value.findIndex(c => c.id === category.id)
-      categories[idx].title = category.title
-      categories[idx].limit = category.limit
+      categories.value[idx].title = category.title
+      categories.value[idx].limit = category.limit
       updateCount.value++
-    } */
+    }
 
     return {
       categories,
       loading,
       updateCount,
-      addNewCategory
-      /* updateCategories */
+      addNewCategory,
+      updateCategories
     }
   }
 }

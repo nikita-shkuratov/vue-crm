@@ -48,7 +48,7 @@ export default {
   position: relative;
 }
 .close-sidebar {
-  background-image: url('../../assets/ico/close-ico.svg');
+  background-image: url('../../../assets/ico/close-ico.svg');
   height: 20px;
   width: 20px;
   position: absolute;

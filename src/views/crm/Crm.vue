@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Счет</h3>
+      <h3>Bill</h3>
 
       <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import CrmBill from '../../components/crm/CrmBill/CrmBill'
-import HomeCurrency from '../../components/crm/CrmCurrency/CrmCurrency'
+import CrmBill from '../../components/crm/CrmBill'
+import HomeCurrency from '../../components/crm/CrmCurrency'
 import AppLoader from '../../components/ui/AppLoader.vue'
 
 export default {
@@ -32,7 +32,6 @@ export default {
 
   async mounted () {
     this.currency = await this.$store.dispatch('fetchCurrency')
-    console.log('currency', this.currency)
     this.loading = false
   },
 

@@ -15,18 +15,16 @@
       <tr v-for="(record, idx) of records" :key="record.id">
         <td>{{ idx + 1 }}</td>
         <td>{{ record.amount }}</td>
-        <td>{{ record.date }}</td>
+        <td>{{ filter(record.date) }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
-          <span :class="[record.typeClass]" class="white-text badge">{{
-            record.type
-          }}</span>
+          <span>{{record.type }}</span>
         </td>
         <td>
           <button
             v-tooltip="'View the recording'"
             class="btn-small btn"
-            @click="$router.push('/crm/detail/' + record.id)"
+            @click="$router.push('/crm/history/detail/' + record.id)"
           >
             <i class="material-icons">open_in_new</i>
           </button>
@@ -38,6 +36,21 @@
 
 <script>
 export default {
-  props: ['records']
+  props: ['records'],
+  mounted () {
+    console.log(this.records)
+  },
+
+  methods: {
+    filter (value) {
+      const options = {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric'
+      }
+      const locale = 'en-US'
+      return new Intl.DateTimeFormat(locale, options).format(new Date(value))
+    }
+  }
 }
 </script>
