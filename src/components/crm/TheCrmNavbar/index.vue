@@ -59,7 +59,6 @@ export default {
         minute: '2-digit',
         second: '2-digit'
       }
-      /*       const locale = store.getters.info.locale || 'ru-RU' */
       const locale = 'ru-RU'
       return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }

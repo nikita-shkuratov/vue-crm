@@ -39,10 +39,10 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { currency } from '../../helpers/currency'
-import AppPage from '../../components/ui/AppPage.vue'
-import AppLoader from '../../components/ui/AppLoader.vue'
-import AppStatus from '../../components/ui/AppStatus.vue'
+import { currency } from '../helpers/currency'
+import AppPage from '../components/ui/AppPage.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
+import AppStatus from '../components/ui/AppStatus.vue'
 
 export default {
   components: { AppPage, AppLoader, AppStatus },

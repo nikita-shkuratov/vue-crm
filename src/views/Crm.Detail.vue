@@ -35,7 +35,7 @@
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 
 export default {
   components: { AppLoader },

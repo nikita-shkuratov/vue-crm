@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
-import auth from './modules/auth.module'
+import auth from './modules/authorization.module'
 import request from './modules/request.module'
-import register from './modules/reg.module'
+import register from './modules/registration.module'
 import category from './modules/category.module'
 import record from './modules/record.module'
 

@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import CategoryCreate from '../../components/crm/CategoryCreate'
-import CategoryEdit from '../../components/crm/CategoryEdit'
+import CategoryCreate from '../components/crm/CategoryCreate'
+import CategoryEdit from '../components/crm/CategoryEdit'
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 
 export default {
   components: {

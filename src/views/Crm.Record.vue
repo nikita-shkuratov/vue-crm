@@ -86,9 +86,9 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 import { useStore } from 'vuex'
-import { useRecordForm } from '../../helpers/record.form'
+import { useRecordForm } from '../helpers/record.form'
 
 export default {
   components: { AppLoader },

@@ -37,10 +37,6 @@
 <script>
 export default {
   props: ['records'],
-  mounted () {
-    console.log(this.records)
-  },
-
   methods: {
     filter (value) {
       const options = {

@@ -32,7 +32,7 @@
 
 <script>
 import { useStore } from 'vuex'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 import { ref, onMounted } from 'vue'
 
 export default {

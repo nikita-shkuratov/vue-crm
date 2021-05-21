@@ -17,8 +17,8 @@
 <script>
 import { useStore } from 'vuex'
 import { ref, onMounted } from 'vue'
-import AppLoader from '../../components/ui/AppLoader.vue'
-import HistoryTable from '../../components/crm/HistoryTable'
+import AppLoader from '../components/ui/AppLoader.vue'
+import HistoryTable from '../components/crm/HistoryTable'
 
 export default {
   name: 'history',
@@ -35,6 +35,7 @@ export default {
     onMounted(async () => {
       records.value = await store.dispatch('record/fetchRecords') || []
       loading.value = false
+      console.log(store)
     })
 
     return {
