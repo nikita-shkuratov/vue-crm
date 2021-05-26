@@ -35,7 +35,6 @@ export default {
     onMounted(async () => {
       records.value = await store.dispatch('record/fetchRecords') || []
       loading.value = false
-      console.log(store)
     })
 
     return {

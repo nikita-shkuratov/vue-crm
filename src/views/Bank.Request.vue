@@ -57,7 +57,7 @@ export default {
 
     onMounted(async () => {
       loading.value = true
-      request.value = await store.dispatch('request/loadOne', route.params.id)
+      request.value = await store.dispatch('request/fetchRequest', route.params.id)
       status.value = request.value?.status
       loading.value = false
     })
@@ -65,7 +65,7 @@ export default {
     const hasChanges = computed(() => request.value.status !== status.value)
 
     const remove = async () => {
-      await store.dispatch('request/remove', route.params.id)
+      await store.dispatch('request/removeRequest', route.params.id)
       router.push('/')
     }
 
@@ -75,7 +75,7 @@ export default {
         status: status.value,
         id: route.params.id
       }
-      await store.dispatch('request/update', data)
+      await store.dispatch('request/updateRequest', data)
       request.value.status = status.value
     }
 

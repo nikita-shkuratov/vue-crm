@@ -47,7 +47,7 @@ export default {
 
     onMounted(async () => {
       loading.value = true
-      store.dispatch('request/load')
+      store.dispatch('request/fetchRequests')
       loading.value = false
     })
 

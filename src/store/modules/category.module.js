@@ -21,14 +21,13 @@ export default {
   actions: {
     async createCategory ({ commit }, payload) {
       try {
-        const token = store.getters['auth/token']
-        const user = store.getters.getUser
+        const { token, userId } = store.getters['auth/authorizationData']
         const response = await axios.post(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}/categories.json?auth=${token}`,
+          `/users/${userId}/categories.json?auth=${token}`,
           payload
         )
         const { data } = await axios.patch(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${user.id}/categories/${response.data.name}.json?auth=${token}`,
+          `/users/${userId}/categories/${response.data.name}.json?auth=${token}`,
           {
             id: response.data.name
           }
@@ -45,13 +44,12 @@ export default {
     },
     async fetchCategories ({ commit }) {
       try {
-        const token = store.getters['auth/token']
-        const { id } = store.getters.getUser
+        const { token, userId } = store.getters['auth/authorizationData']
         const { data } = await axios.get(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories.json?auth=${token}`
+          `/users/${userId}/categories.json?auth=${token}`
         )
         if (data) {
-          const requests = Object.keys(data).map(id => ({ ...data[id], id }))
+          const requests = Object.keys(data).map(id => ({ ...data[id], id })) // to do
           commit('setCategories', requests)
           return requests
         } else {
@@ -63,10 +61,9 @@ export default {
     },
     async fetchCategoryById (_, categoryId) {
       try {
-        const token = store.getters['auth/token']
-        const { id } = store.getters.getUser
+        const { token, userId } = store.getters['auth/authorizationData']
         const { data } = await axios.get(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories/${categoryId}.json?auth=${token}`
+          `/users/${userId}/categories/${categoryId}.json?auth=${token}`
         )
         return { ...data, id: categoryId }
       } catch (e) {
@@ -75,10 +72,9 @@ export default {
     },
     async updateCategory (_, payload) {
       try {
-        const token = store.getters['auth/token']
-        const { id } = store.getters.getUser
+        const { token, userId } = store.getters['auth/authorizationData']
         const { data } = await axios.put(
-          `https://vue-crm-531ed-default-rtdb.firebaseio.com/users/${id}/categories/${payload.id}/.json?auth=${token}`,
+          `/users/${userId}/categories/${payload.id}/.json?auth=${token}`,
           payload
         )
         store.dispatch('setMessage', {

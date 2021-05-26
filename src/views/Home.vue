@@ -1,5 +1,4 @@
 <template>
-  <app-dropdown-settings></app-dropdown-settings>
   <div class="card-block">
     <router-link to="/crm">
       <div class="card crm">
@@ -17,9 +16,7 @@
 </template>
 
 <script>
-import AppDropdownSettings from '../components/ui/AppDropdownSettings.vue'
 export default {
-  components: { AppDropdownSettings },
   name: 'Home'
 }
 </script>

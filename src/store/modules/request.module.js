@@ -19,14 +19,20 @@ export default {
   },
 
   actions: {
-    async create ({ commit, dispatch }, payload) {
+    async createRequest ({ commit, dispatch }, payload) {
       try {
-        const token = store.getters['auth/token']
-        const { data } = await axios.post(
-          `/requests.json?auth=${token}`,
+        const { token, userId } = store.getters['auth/authorizationData']
+        const response = await axios.post(
+          `/users/${userId}/requests.json?auth=${token}`,
           payload
         )
-        commit('addRequest', { ...payload, id: data.name })
+        await axios.patch(
+          `/users/${userId}/requests/${response.data.name}.json?auth=${token}`,
+          {
+            id: response.data.name
+          }
+        )
+        commit('addRequest', { ...payload, id: response.data.name })
         dispatch(
           'setMessage',
           {
@@ -47,11 +53,13 @@ export default {
       }
     },
 
-    async load ({ commit, dispatch }) {
+    async fetchRequests ({ commit, dispatch }) {
       try {
-        const token = store.getters['auth/token']
-        const { data } = await axios.get(`/requests.json?auth=${token}`)
-        const requests = Object.keys(data).map(id => ({ ...data[id], id }))
+        const { token, userId } = store.getters['auth/authorizationData']
+        const { data } = await axios.get(
+          `/users/${userId}/requests.json?auth=${token}`
+        )
+        const requests = Object.keys(data).map(id => ({ ...data[id], id })) // to do
         commit('setRequests', requests)
       } catch (e) {
         dispatch(
@@ -62,10 +70,12 @@ export default {
       }
     },
 
-    async loadOne ({ dispatch }, id) {
+    async fetchRequest ({ dispatch }, id) {
       try {
-        const token = store.getters['auth/token']
-        const { data } = await axios.get(`/requests/${id}.json?auth=${token}`)
+        const { token, userId } = store.getters['auth/authorizationData']
+        const { data } = await axios.get(
+          `/users/${userId}/requests/${id}.json?auth=${token}`
+        )
         return data
       } catch (e) {
         dispatch(
@@ -76,10 +86,10 @@ export default {
       }
     },
 
-    async remove ({ dispatch }, id) {
+    async removeRequest ({ dispatch }, id) {
       try {
-        const token = store.getters['auth/token']
-        await axios.delete(`/requests/${id}.json?auth=${token}`)
+        const { token, userId } = store.getters['auth/authorizationData']
+        await axios.delete(`/users/${userId}/requests/${id}.json?auth=${token}`)
         dispatch(
           'setMessage',
           {
@@ -97,11 +107,11 @@ export default {
       }
     },
 
-    async update ({ dispatch }, request) {
+    async updateRequest ({ dispatch }, request) {
       try {
-        const token = store.getters['auth/token']
+        const { token, userId } = store.getters['auth/authorizationData']
         await axios.put(
-          `/requests/${request.id}.json?auth=${token}`,
+          `/users/${userId}/requests/${request.id}.json?auth=${token}`,
           request
         )
         dispatch(

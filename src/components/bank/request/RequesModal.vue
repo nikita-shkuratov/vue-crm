@@ -72,7 +72,7 @@ export default {
   setup (_, { emit }) {
     const store = useStore()
     const submit = async values => {
-      await store.dispatch('request/create', values)
+      await store.dispatch('request/createRequest', values)
       emit('created')
     }
 
