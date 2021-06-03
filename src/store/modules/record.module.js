@@ -50,7 +50,7 @@ export default {
           `/users/${userId}/records.json?auth=${token}`
         )
         if (data) {
-          const requests = Object.keys(data).map(id => ({ ...data[id], id })) // to do
+          const requests = Object.keys(data).map(id => ({ ...data[id], id }))
           commit('setRecord', requests)
           return requests
         } else {

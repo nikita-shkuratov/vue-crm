@@ -22,26 +22,31 @@ export default {
     async createCategory ({ commit }, payload) {
       try {
         const { token, userId } = store.getters['auth/authorizationData']
-        const response = await axios.post(
+        const { data } = await axios.post(
           `/users/${userId}/categories.json?auth=${token}`,
           payload
         )
-        const { data } = await axios.patch(
-          `/users/${userId}/categories/${response.data.name}.json?auth=${token}`,
+
+        await axios.patch(
+          `/users/${userId}/categories/${data.name}.json?auth=${token}`,
           {
-            id: response.data.name
+            id: data.name
           }
         )
-        commit('addCategory', { data })
+
+        commit('addCategory', { ...payload, id: data.name })
+
         store.dispatch('setMessage', {
           value: 'The category was created successfully.',
           type: true
         })
-        return data
+
+        return { ...payload, id: data.name }
       } catch (e) {
         console.log(e)
       }
     },
+
     async fetchCategories ({ commit }) {
       try {
         const { token, userId } = store.getters['auth/authorizationData']

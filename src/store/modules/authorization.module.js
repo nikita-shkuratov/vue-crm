@@ -1,6 +1,5 @@
-import axios from 'axios'
+import axios from '../../axios/request'
 import store from '../index'
-import { constants } from '../../constants/constants'
 import { error } from '../../helpers/error'
 
 export default {
@@ -31,11 +30,11 @@ export default {
   actions: {
     async login ({ commit }, payload) {
       try {
-        const { data } = await axios.post(constants.AUTH_USER, payload)
+        const { data } = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCF1zsP6oJi3Mr2311L3YiY8KD3HShnSUQ', payload)
         commit('setToken', data.idToken)
 
         const responce = await axios.get(
-          `${constants.AUTH_GET_USER}${data.idToken}`
+          `/users.json?auth=${data.idToken}`
         )
 
         const user = Object.values(responce.data).filter(

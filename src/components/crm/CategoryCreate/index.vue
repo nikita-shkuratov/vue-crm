@@ -5,7 +5,7 @@
         <h4>Create</h4>
       </div>
 
-      <form @submit.prevent="onSubmit">
+      <form @submit="onSubmit">
         <div class="input-field">
           <label for="title">Title</label>
           <input
@@ -56,9 +56,11 @@ export default {
   emits: ['created'],
   setup (_, { emit }) {
     const store = useStore()
-    const submit = async values => {
+
+    const submit = async (values, { resetForm }) => {
       const category = await store.dispatch('category/createCategory', values)
       emit('created', category)
+      resetForm()
     }
     onMounted(async () => {
       // eslint-disable-next-line

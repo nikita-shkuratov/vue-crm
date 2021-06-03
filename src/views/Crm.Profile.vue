@@ -37,7 +37,6 @@ export default {
 
     onMounted(async () => {
       user.value = await store.dispatch('loadUser')
-      // need to do
       catCount.value = Object.keys(user.value.categories).length
       recCount.value = Object.keys(user.value.records).length
       loading.value = false

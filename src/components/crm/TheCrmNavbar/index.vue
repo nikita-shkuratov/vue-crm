@@ -16,7 +16,7 @@
             data-target="dropdown"
             ref="dropdown"
           >
-            {{name }}
+            {{ name }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -45,7 +45,9 @@ export default {
   data: () => ({
     date: new Date(),
     interval: null,
-    dropdown: null
+    dropdown: null,
+    firstName: '',
+    lastName: ''
   }),
   methods: {
     logout () {
@@ -65,9 +67,10 @@ export default {
   computed: {
     name () {
       const { firstName, lastName } = this.$store.getters.getUser
-      return `${firstName} ${lastName}`
+      return firstName ? `${firstName} ${lastName}` : ''
     }
   },
+
   mounted () {
     this.interval = setInterval(() => {
       this.date = new Date()
