@@ -131,7 +131,7 @@ p {
   box-sizing: border-box;
   border-radius: 40px;
   height: 40px;
-  width: 100px;
+  width: 110px;
   padding: 0px 10px;
 
   &.select {

@@ -55,7 +55,6 @@ export default {
     const updateCategories = category => {
       const idx = categories.value.findIndex(c => c.id === category.id)
       categories.value[idx].title = category.title
-      categories.value[idx].limit = category.limit
       updateCount.value++
     }
 

@@ -13,6 +13,9 @@
             }}</option>
           </select>
           <label>Select a category</label>
+          <small class="error-message" v-if="selectError">{{
+            selectError
+          }}</small>
         </div>
 
         <div class="input-field">
@@ -54,7 +57,7 @@
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
-import { useCategoryForm } from '../../../helpers/categories.form'
+import { useCategoryEditForm } from '../../../helpers/category.edit.form'
 
 export default {
   props: {
@@ -67,14 +70,14 @@ export default {
   setup (props, { emit }) {
     const store = useStore()
     const select = ref(null)
-    const selectData = ref('')
 
-    const submit = async values => {
+    const submit = async (values, { resetForm }) => {
       const categoryData = await store.dispatch('category/updateCategory', {
         ...values,
-        id: selectData.value
+        id: values.selectData
       })
       emit('updated', categoryData)
+      resetForm()
     }
 
     onMounted(async () => {
@@ -92,8 +95,7 @@ export default {
 
     return {
       select,
-      selectData,
-      ...useCategoryForm(submit)
+      ...useCategoryEditForm(submit)
     }
   }
 }

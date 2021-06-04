@@ -50,8 +50,7 @@
 <script>
 import { onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { useCategoryForm } from '../../../helpers/categories.form'
-
+import { useCategoryForm } from '../../../helpers/category.create.form'
 export default {
   emits: ['created'],
   setup (_, { emit }) {

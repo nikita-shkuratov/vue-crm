@@ -58,6 +58,18 @@ export default {
 </script>
 <style scoped lang="scss">
 .badge {
+  width: 80px;
+  border: 1px solid #b7c3d6;
+  border-radius: 24px;
+  padding: 3px;
+  font-size: 14px;
+  text-align: center;
   color: #ffffff;
+  &.primary {
+    background: linear-gradient(180deg, #25af86 0%, #7cd46f 100%);
+  }
+  &.danger {
+    background: linear-gradient(180deg, #d40d1e 0%, #e44141 100%);
+  }
 }
 </style>
