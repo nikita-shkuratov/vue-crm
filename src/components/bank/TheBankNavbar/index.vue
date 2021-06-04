@@ -4,9 +4,15 @@
 
     <ul class="navbar-menu">
       <li>
-        <router-link to="/bank"
-         custom v-slot="{href, navigate}">
-         <a @click="navigate" :class="{active: $route.path.indexOf(href) != -1}" href="#"> Requests</a></router-link>
+        <router-link to="/bank" custom v-slot="{ href, navigate }">
+          <a
+            @click="navigate"
+            :class="{ active: $route.path.indexOf(href) != -1 }"
+            href="#"
+          >
+            Requests</a
+          ></router-link
+        >
       </li>
       <li>
         <router-link to="/help">Help</router-link>
@@ -75,6 +81,10 @@ export default {
       color: #ffffff;
       &.active {
         color: #5856567e;
+      }
+      &:hover {
+        color: #5856567e;
+        background: none;
       }
     }
   }

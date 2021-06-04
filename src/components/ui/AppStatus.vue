@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .badge {
   width: 80px;
   border: 1px solid #b7c3d6;

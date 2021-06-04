@@ -1,22 +1,25 @@
 <template>
-  <app-loader class="loader" v-if="loading" />
+  <app-loader class="loader" type='bank' v-if="loading" />
   <app-page v-else-if="request" back>
     <div class="container">
-      <p><strong>Name:</strong> {{ request.name }}</p>
-      <p><strong>Phone:</strong> {{ request.phone }}</p>
-      <p><strong>Amount:</strong> {{ currency(request.amount) }}</p>
-      <div class="status-txt">
-        <div>Status</div>
-        : <app-status :type="request.status" />
+      <div class="block-info">
+        <p><strong>Name:</strong> {{ request.name }}</p>
+        <p><strong>Phone:</strong> {{ request.phone }}</p>
+        <p><strong>Amount:</strong> {{ currency(request.amount) }}</p>
+        <div class="status-txt">
+          <div>Status</div>
+          :
+          <app-status :type="request.status" />
+        </div>
       </div>
       <hr />
       <div class="inf-text">
         You can change the status of the request or delete it.
       </div>
       <div class="change-wrapper">
-        <div class="form-item">
+        <div class="form-item request">
           <label for="status">Status:</label>
-          <select class="myInput" id="status" v-model="status">
+          <select class="myInput select" id="status" v-model="status">
             <option value="done">Done</option>
             <option value="canceled">Canceled</option>
             <option value="active">Active</option>
@@ -57,7 +60,10 @@ export default {
 
     onMounted(async () => {
       loading.value = true
-      request.value = await store.dispatch('request/fetchRequest', route.params.id)
+      request.value = await store.dispatch(
+        'request/fetchRequest',
+        route.params.id
+      )
       status.value = request.value?.status
       loading.value = false
     })
@@ -66,7 +72,7 @@ export default {
 
     const remove = async () => {
       await store.dispatch('request/removeRequest', route.params.id)
-      router.push('/')
+      router.push('/bank')
     }
 
     const update = async () => {
@@ -96,7 +102,12 @@ export default {
   position: relative;
   font-family: 'Didact Gothic', sans-serif;
   font-weight: normal;
-  font-size: 30px;
+  strong {
+    font-weight: bold;
+  }
+  .block-info {
+    font-size: 30px;
+  }
 }
 p {
   margin: 5px 0px;
@@ -123,10 +134,14 @@ p {
   width: 100px;
   padding: 0px 10px;
 
+  &.select {
+    display: block;
+  }
+
   &:focus {
     outline: none;
-    border: 1px solid #5db678;
-    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
+    border: 1px solid #5db678 !important;
+    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5) !important;
     box-sizing: border-box;
     border-radius: 40px;
   }
@@ -141,6 +156,10 @@ p {
 .form-item {
   select {
     margin-left: 15px;
+  }
+  &.request {
+    display: flex;
+    align-items: center;
   }
 }
 .btn-wrapper {

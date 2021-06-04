@@ -14,11 +14,17 @@
     <tbody>
       <tr v-for="(record, idx) of records" :key="record.id">
         <td>{{ idx + 1 }}</td>
-        <td>{{ record.amount }}</td>
+        <td>
+          {{ record.type === 'income' ? '+' : '-' }} {{ record.amount }}&nbsp;RUB
+        </td>
         <td>{{ filter(record.date) }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
-          <span>{{record.type }}</span>
+          <div
+            :class="['badge', record.type === 'income' ? 'primary' : 'danger']"
+          >
+            {{ record.type }}
+          </div>
         </td>
         <td>
           <button
@@ -50,3 +56,8 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+.badge {
+  color: #ffffff;
+}
+</style>

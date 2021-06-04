@@ -20,7 +20,7 @@
             <div class="card-content white-text">
               <p>Category: {{ record.categoryName }}</p>
               <p>Description: {{ record.description }}</p>
-              <p>Amount: {{ record.amount }}</p>
+              <p>Amount: {{ record.amount }}&nbsp;RUB</p>
               <small>{{ filter(record.date) }}</small>
             </div>
           </div>
