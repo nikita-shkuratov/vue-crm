@@ -208,4 +208,15 @@
   .title {
     font-size: 25px !important;
   }
+  .footer-wrapper {
+    margin-top: 20px !important;
+  }
+  .info-text {
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
 }

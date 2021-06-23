@@ -49,3 +49,7 @@ export default {
   }
 }
 </script>
+
+<style lang='scss'>
+@import '../assets/view.crmHome.scss';
+</style>

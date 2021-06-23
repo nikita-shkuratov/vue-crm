@@ -14,9 +14,7 @@
     <tbody>
       <tr v-for="(record, idx) of records" :key="record.id">
         <td>{{ idx + 1 }}</td>
-        <td>
-          {{ record.type === 'income' ? '+' : '-' }} {{ record.amount }}&nbsp;RUB
-        </td>
+        <td>{{ record.amount }}&nbsp;RUB</td>
         <td>{{ filter(record.date) }}</td>
         <td>{{ record.categoryName }}</td>
         <td>
@@ -70,6 +68,20 @@ export default {
   }
   &.danger {
     background: linear-gradient(180deg, #d40d1e 0%, #e44141 100%);
+  }
+}
+@media (max-width: 500px) {
+  * {
+    font-size: 0.9rem !important;
+  }
+  .badge {
+    width: 55px;
+  }
+
+  .btn-small.btn {
+    width: 25px;
+    height: 25px;
+    padding: 0;
   }
 }
 </style>

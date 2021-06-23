@@ -100,3 +100,10 @@ export default {
   }
 }
 </script>
+<style scoped lang="scss">
+@media (max-width: 650px) {
+  .col {
+    margin-top: 40px;
+  }
+}
+</style>
