@@ -111,4 +111,10 @@ export default {
 .side__bar_time {
   margin-left: 15px;
 }
+@media only screen and (max-width: 600px) {
+  .hide-on-small-only,
+  .hide-on-small-and-down {
+    display: block !important;
+  }
+}
 </style>

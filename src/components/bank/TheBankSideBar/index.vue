@@ -56,4 +56,11 @@ export default {
   right: 15px;
   z-index: 100;
 }
+
+@media(max-width:700px){
+  .sidebar-container {
+    width: auto;
+    height: auto;
+  }
+}
 </style>

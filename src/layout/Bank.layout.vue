@@ -33,4 +33,10 @@ export default {
   height: 100vh;
   padding: 10px;
 }
+@media(max-width:500px){
+ .container{width: 100%;
+ padding: 5px 10px;
+}
+
+}
 </style>

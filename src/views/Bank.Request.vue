@@ -91,6 +91,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .container {
   margin: 30px auto;
   box-sizing: border-box;
@@ -200,5 +201,11 @@ p {
   top: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media(max-width:700px){
+  .container{
+    width: auto  !important;
+  }
 }
 </style>

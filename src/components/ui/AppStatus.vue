@@ -63,4 +63,10 @@ export default {
     background: linear-gradient(180deg, #d46d0d 0%, #e48241 100%);
   }
 }
+@media(max-width:650px){
+  *{
+    font-size: 0.9rem;
+  }
+   .badge {
+  width: 57px;}}
 </style>

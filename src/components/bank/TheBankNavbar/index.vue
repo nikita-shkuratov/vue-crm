@@ -89,4 +89,18 @@ export default {
     }
   }
 }
+@media(max-width:600px){
+  h3{
+    font-size: 14px !important;
+    text-align: center;
+    margin-bottom: 5px !important;
+
+  }
+  .navbar {
+display: block !important;
+  }
+  li{
+    margin-left: 0px !important;
+  }
+}
 </style>

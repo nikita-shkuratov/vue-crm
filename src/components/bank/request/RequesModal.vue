@@ -95,7 +95,7 @@ export default {
   line-height: 20px;
   color: #333333;
   padding: 20px;
-  width:400px;
+  width: 400px;
 
   .title {
     text-align: center;
@@ -148,9 +148,9 @@ export default {
           border-radius: 40px;
           height: 50px;
           padding: 0px 20px;
-&.select{
-  display: block;
-}
+          &.select {
+            display: block;
+          }
           &:focus {
             outline: none;
             border: 1px solid #5db678 !important;
@@ -197,6 +197,11 @@ export default {
         }
       }
     }
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    width: 350px !important;
   }
 }
 </style>
