@@ -47,7 +47,7 @@ export default createStore({
       const key = 'c2b1b5b18e71531c830cbd725569fcc0'
       try {
         const { data } = await axios.get(
-          `http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
+          `https://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
         )
         commit('setСurrencies', data)
         return data
