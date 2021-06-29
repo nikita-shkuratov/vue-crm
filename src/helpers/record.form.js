@@ -9,6 +9,17 @@ export function useRecordForm (fn) {
   })
 
   const {
+    value: category,
+    errorMessage: catError
+  } = useField(
+    'category',
+    yup
+      .string()
+      .trim()
+      .required()
+  )
+
+  const {
     value: amount,
     errorMessage: amountError,
     handleBlur: amountBlur
@@ -40,6 +51,8 @@ export function useRecordForm (fn) {
   const onSubmit = handleSubmit(fn)
 
   return {
+    category,
+    catError,
     amount,
     amountError,
     amountBlur,

@@ -1,5 +1,5 @@
 <template>
-  <div class="app-loader">
+  <div :class="['app-loader', type]">
     <div class="preloader-wrapper big active">
       <div class="spinner-layer spinner-color-only">
         <div class="circle-clipper left">
@@ -17,18 +17,29 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['type']
+}
 </script>
 
-<style scoped lang="scss">
-.app-loader{
-position: absolute;
-.spinner-layer{
-border-color:#B65D9B}
-}
-.preloader-wrapper{
+<style lang="scss">
+.app-loader {
   position: absolute;
-  top:45%;
+  .spinner-layer {
+    border-color: #b65d9b;
+  }
+}
+.app-loader {
+  &.bank {
+    position: absolute;
+    .spinner-layer {
+      border-color: #7cd46f;
+    }
+  }
+}
+.preloader-wrapper {
+  position: absolute;
+  top: 45%;
   left: 50%;
   z-index: 10000;
 }

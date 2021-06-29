@@ -1,22 +1,25 @@
 <template>
-  <app-loader class="loader" v-if="loading" />
+  <app-loader class="loader" type='bank' v-if="loading" />
   <app-page v-else-if="request" back>
     <div class="container">
-      <p><strong>Name:</strong> {{ request.name }}</p>
-      <p><strong>Phone:</strong> {{ request.phone }}</p>
-      <p><strong>Amount:</strong> {{ currency(request.amount) }}</p>
-      <div class="status-txt">
-        <div>Status</div>
-        : <app-status :type="request.status" />
+      <div class="block-info">
+        <p><strong>Name:</strong> {{ request.name }}</p>
+        <p><strong>Phone:</strong> {{ request.phone }}</p>
+        <p><strong>Amount:</strong> {{ currency(request.amount) }}</p>
+        <div class="status-txt">
+          <div>Status</div>
+          :
+          <app-status :type="request.status" />
+        </div>
       </div>
       <hr />
       <div class="inf-text">
         You can change the status of the request or delete it.
       </div>
       <div class="change-wrapper">
-        <div class="form-item">
+        <div class="form-item request">
           <label for="status">Status:</label>
-          <select class="myInput" id="status" v-model="status">
+          <select class="myInput select" id="status" v-model="status">
             <option value="done">Done</option>
             <option value="canceled">Canceled</option>
             <option value="active">Active</option>
@@ -39,10 +42,10 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { currency } from '../../helpers/currency'
-import AppPage from '../../components/ui/AppPage.vue'
-import AppLoader from '../../components/ui/AppLoader.vue'
-import AppStatus from '../../components/ui/AppStatus.vue'
+import { currency } from '../helpers/currency'
+import AppPage from '../components/ui/AppPage.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
+import AppStatus from '../components/ui/AppStatus.vue'
 
 export default {
   components: { AppPage, AppLoader, AppStatus },
@@ -57,7 +60,10 @@ export default {
 
     onMounted(async () => {
       loading.value = true
-      request.value = await store.dispatch('request/loadOne', route.params.id)
+      request.value = await store.dispatch(
+        'request/fetchRequest',
+        route.params.id
+      )
       status.value = request.value?.status
       loading.value = false
     })
@@ -65,8 +71,8 @@ export default {
     const hasChanges = computed(() => request.value.status !== status.value)
 
     const remove = async () => {
-      await store.dispatch('request/remove', route.params.id)
-      router.push('/')
+      await store.dispatch('request/removeRequest', route.params.id)
+      router.push('/bank')
     }
 
     const update = async () => {
@@ -75,7 +81,7 @@ export default {
         status: status.value,
         id: route.params.id
       }
-      await store.dispatch('request/update', data)
+      await store.dispatch('request/updateRequest', data)
       request.value.status = status.value
     }
 
@@ -85,6 +91,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 .container {
   margin: 30px auto;
   box-sizing: border-box;
@@ -96,7 +103,12 @@ export default {
   position: relative;
   font-family: 'Didact Gothic', sans-serif;
   font-weight: normal;
-  font-size: 30px;
+  strong {
+    font-weight: bold;
+  }
+  .block-info {
+    font-size: 30px;
+  }
 }
 p {
   margin: 5px 0px;
@@ -120,13 +132,17 @@ p {
   box-sizing: border-box;
   border-radius: 40px;
   height: 40px;
-  width: 100px;
+  width: 110px;
   padding: 0px 10px;
+
+  &.select {
+    display: block;
+  }
 
   &:focus {
     outline: none;
-    border: 1px solid #5db678;
-    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
+    border: 1px solid #5db678 !important;
+    box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5) !important;
     box-sizing: border-box;
     border-radius: 40px;
   }
@@ -141,6 +157,10 @@ p {
 .form-item {
   select {
     margin-left: 15px;
+  }
+  &.request {
+    display: flex;
+    align-items: center;
   }
 }
 .btn-wrapper {
@@ -181,5 +201,11 @@ p {
   top: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+@media(max-width:700px){
+  .container{
+    width: auto  !important;
+  }
 }
 </style>

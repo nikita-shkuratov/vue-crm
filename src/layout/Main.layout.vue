@@ -17,4 +17,8 @@ export default {}
   flex-direction: column;
   flex-wrap: wrap;
 }
+@media(max-width:800px){
+  .wrapper{height: 100%;
+  width: 100%;}
+}
 </style>

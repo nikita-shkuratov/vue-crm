@@ -20,11 +20,11 @@
 </template>
 
 <script>
-import CategoryCreate from '../../components/crm/CategoryCreate'
-import CategoryEdit from '../../components/crm/CategoryEdit'
+import CategoryCreate from '../components/crm/CategoryCreate'
+import CategoryEdit from '../components/crm/CategoryEdit'
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 
 export default {
   components: {
@@ -40,18 +40,21 @@ export default {
     const updateCount = ref(0)
 
     onMounted(async () => {
-      categories.value = await store.dispatch('category/fetchCategories') || []
+      categories.value =
+        (await store.dispatch('category/fetchCategories')) || []
       loading.value = false
     })
 
     const addNewCategory = category => {
-      categories.value.push(category)
+      const chechCategoryInArr = categories.value.some(cat => cat.id === category.id)
+      if (!chechCategoryInArr) {
+        categories.value.push(category)
+      }
     }
 
     const updateCategories = category => {
       const idx = categories.value.findIndex(c => c.id === category.id)
       categories.value[idx].title = category.title
-      categories.value[idx].limit = category.limit
       updateCount.value++
     }
 

@@ -108,4 +108,25 @@ export default {
 select {
   display: block !important;
 }
+@media (max-width: 650px) {
+  .bankInput {
+    width: 130px !important;
+    height: 30px !important;
+    font-size: 0.9rem;
+    &:focus {
+      width: 130px !important;
+      height: 30px !important;
+    }
+  }
+  .button {
+    display: flex;
+
+    width: 80px;
+    height: 30px;
+    &:focus {
+      width: 80px;
+      height: 30px;
+    }
+  }
+}
 </style>

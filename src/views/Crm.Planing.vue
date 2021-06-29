@@ -16,7 +16,7 @@
       <div v-for="cat of categories" :key="cat.id">
         <p>
           <strong>{{ cat.title }}:</strong>
-          {{ cat.spend }} of {{ cat.limit }}
+          {{ currencyFilter(cat.spend) }} of {{ currencyFilter(cat.limit) }}
         </p>
         <div class="progress" v-tooltip="cat.tooltip">
           <div
@@ -32,8 +32,9 @@
 
 <script>
 import { useStore } from 'vuex'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 import { ref, onMounted } from 'vue'
+import { currency } from '../helpers/currency'
 
 export default {
   components: { AppLoader },
@@ -55,8 +56,9 @@ export default {
     onMounted(async () => {
       myBill.value = store.getters.getMyBill
 
-      const records = await store.dispatch('record/fetchRecords') || []
-      const categoires = await store.dispatch('category/fetchCategories') || []
+      const records = (await store.dispatch('record/fetchRecords')) || []
+      const categoires =
+        (await store.dispatch('category/fetchCategories')) || []
 
       categories.value = categoires.map(cat => {
         const spend = records
@@ -81,7 +83,8 @@ export default {
           progressPercent,
           progressColor,
           spend,
-          tooltip
+          tooltip,
+          currency
         }
       })
 
@@ -91,7 +94,8 @@ export default {
     return {
       loading,
       categories,
-      myBill
+      myBill,
+      currencyFilter
     }
   }
 }

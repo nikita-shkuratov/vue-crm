@@ -63,8 +63,11 @@
       <div class="footer-wrapper">
         <label>
           <input type="checkbox" v-model="agree" />
-          <span>I entered the correct data and remembered it.</span>
+          <span :class="agError ? 'check-box-error' : ''"
+            >I entered the correct data and remembered it.</span
+          >
         </label>
+
         <button
           class="button"
           type="submit"
@@ -97,3 +100,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.check-box-error {
+    &:before {
+      border: 2px solid #f50101 !important;
+    }
+}
+</style>

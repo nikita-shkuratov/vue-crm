@@ -18,14 +18,14 @@ export default {
 
 <style scoped lang="scss">
 .question {
-  margin: 30px;
+  margin: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 .question-title {
-  width: 40%;
+  width: 80%;
   border-radius: 25px;
   text-align: center;
   padding: 10px;
@@ -35,7 +35,7 @@ export default {
   cursor: pointer;
 }
 .question-budy {
-  width: 40%;
+  width: 80%;
   border-radius: 25px;
   text-align: center;
   padding: 10px;

@@ -46,7 +46,7 @@
 
         <div class="form-item">
           <label for="status">Status</label>
-          <select class="myInput" id="status" v-model="status">
+          <select class="myInput select" id="status" v-model="status">
             <option value="done">Done</option>
             <option value="canceled">Canceled</option>
             <option value="active">Active</option>
@@ -72,7 +72,7 @@ export default {
   setup (_, { emit }) {
     const store = useStore()
     const submit = async values => {
-      await store.dispatch('request/create', values)
+      await store.dispatch('request/createRequest', values)
       emit('created')
     }
 
@@ -95,7 +95,7 @@ export default {
   line-height: 20px;
   color: #333333;
   padding: 20px;
-  width:400px;
+  width: 400px;
 
   .title {
     text-align: center;
@@ -148,11 +148,13 @@ export default {
           border-radius: 40px;
           height: 50px;
           padding: 0px 20px;
-
+          &.select {
+            display: block;
+          }
           &:focus {
             outline: none;
-            border: 1px solid #5db678;
-            box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5);
+            border: 1px solid #5db678 !important;
+            box-shadow: 0px 4px 10px rgba(93, 182, 120, 0.5) !important;
             box-sizing: border-box;
             border-radius: 40px;
             height: 50px;
@@ -195,6 +197,11 @@ export default {
         }
       }
     }
+  }
+}
+@media (max-width: 400px) {
+  .container {
+    width: 350px !important;
   }
 }
 </style>

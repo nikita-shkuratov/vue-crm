@@ -1,25 +1,27 @@
-import axios from 'axios'
+import axios from '../../axios/request'
 import store from '../index'
 import { error } from '../../helpers/error'
-import { constants } from '../../constants/constants'
 
 export default {
   namespaced: true,
   actions: {
+
     async reg (_, payload) {
       try {
-        const { data } = await axios.post(constants.REG_FIRS, {
+        const { data } = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCF1zsP6oJi3Mr2311L3YiY8KD3HShnSUQ', {
           email: payload.email,
           password: payload.password
         })
+
         const response = await axios.post(
-          `${constants.REG_DB}${data.idToken}`,
+          `/users.json?auth=${data.idToken}`,
           {
             payload
           }
         )
+
         await axios.put(
-          `${constants.REG_ID}${response.data.name}.json?auth=${data.idToken}`,
+          `/users/${response.data.name}.json?auth=${data.idToken}`,
           {
             email: payload.email,
             firstName: payload.firstName,

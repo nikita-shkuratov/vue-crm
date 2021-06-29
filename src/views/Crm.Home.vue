@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import CrmBill from '../../components/crm/CrmBill'
-import HomeCurrency from '../../components/crm/CrmCurrency'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import CrmBill from '../components/crm/CrmBill'
+import HomeCurrency from '../components/crm/CrmCurrency'
+import AppLoader from '../components/ui/AppLoader.vue'
 
 export default {
   name: 'crm',
@@ -49,3 +49,7 @@ export default {
   }
 }
 </script>
+
+<style lang='scss'>
+@import '../assets/view.crmHome.scss';
+</style>

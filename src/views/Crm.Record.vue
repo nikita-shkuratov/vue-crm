@@ -19,8 +19,8 @@
           }}</option>
         </select>
         <label>Select a category</label>
+        <small class="error-message" v-if="catError">{{ catError }}</small>
       </div>
-
       <p>
         <label>
           <input
@@ -33,7 +33,6 @@
           <span>Income</span>
         </label>
       </p>
-
       <p>
         <label>
           <input
@@ -47,9 +46,8 @@
         </label>
       </p>
       <small class="error-message" v-if="typeError">{{ typeError }}</small>
-
       <div class="input-field">
-         <label for="amount">Summ</label>
+        <label for="amount">Summ</label>
         <input
           id="amount"
           type="number"
@@ -61,7 +59,6 @@
           amountError
         }}</small>
       </div>
-
       <div class="input-field">
         <label for="description">Description</label>
         <input
@@ -75,8 +72,11 @@
           descriptionError
         }}</small>
       </div>
-
-      <button class="btn waves-effect waves-light" type="submit">
+      <button
+        class="btn waves-effect waves-light"
+        type="submit"
+        :disabled="isSubmitting"
+      >
         Create
         <i class="material-icons right">send</i>
       </button>
@@ -86,9 +86,9 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 import { useStore } from 'vuex'
-import { useRecordForm } from '../../helpers/record.form'
+import { useRecordForm } from '../helpers/record.form'
 
 export default {
   components: { AppLoader },
@@ -98,12 +98,17 @@ export default {
     const loading = ref(true)
     const select = ref(null)
     const categories = ref([])
-    const category = ref(null)
     const myBill = ref(null)
 
     onMounted(async () => {
-      categories.value = await store.dispatch('category/fetchCategories') || []
+      categories.value =
+        (await store.dispatch('category/fetchCategories')) || []
       myBill.value = store.getters.getUser.bill
+
+      if (!myBill.value) {
+        await store.dispatch('loadUser')
+        myBill.value = store.getters.getUser.bill
+      }
 
       setTimeout(() => {
         // eslint-disable-next-line
@@ -114,16 +119,17 @@ export default {
       loading.value = false
     })
 
-    const submit = async values => {
-      const { amount, description, type } = values
+    const submit = async (values, { resetForm }) => {
+      const { amount, description, type, category } = values
       const checkBill = type === 'income' ? true : myBill.value >= amount
       const categoryName = categories.value.filter(
-        cat => cat.id === category.value
+        cat => cat.id === category
       )[0].title
       if (checkBill) {
         try {
+          loading.value = true
           await store.dispatch('record/createRecord', {
-            categoryId: category.value,
+            categoryId: category,
             categoryName,
             amount,
             description,
@@ -133,6 +139,15 @@ export default {
           const bill =
             type === 'income' ? myBill.value + amount : myBill.value - amount
           await store.dispatch('updateMyBill', bill)
+
+          setTimeout(() => {
+            // eslint-disable-next-line
+            select.value = M.FormSelect.init(select.value)
+            // eslint-disable-next-line
+            M.updateTextFields()
+          }, 0)
+
+          loading.value = false
         } catch (e) {}
       } else {
         store.dispatch('setMessage', {
@@ -140,6 +155,7 @@ export default {
           type: true
         })
       }
+      resetForm()
     }
 
     onUnmounted(() => {
@@ -152,7 +168,6 @@ export default {
       loading,
       select,
       categories,
-      category,
       ...useRecordForm(submit)
     }
   }

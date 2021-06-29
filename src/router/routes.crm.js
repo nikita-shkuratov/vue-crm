@@ -2,7 +2,7 @@ const routesCrm = [
   {
     path: '/crm',
     name: 'Crm',
-    component: () => import('../views/crm/Crm.vue'),
+    component: () => import('../views/Crm.Home.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -11,7 +11,7 @@ const routesCrm = [
   {
     path: '/crm/categories',
     name: 'Categories',
-    component: () => import('../views/crm/Categories.vue'),
+    component: () => import('../views/Crm.Categories.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -20,7 +20,7 @@ const routesCrm = [
   {
     path: '/crm/history/detail/:id',
     name: 'Detail',
-    component: () => import('../views/crm/Detail.vue'),
+    component: () => import('../views/Crm.Detail.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -29,7 +29,7 @@ const routesCrm = [
   {
     path: '/crm/history',
     name: 'History',
-    component: () => import('../views/crm/History.vue'),
+    component: () => import('../views/Crm.History.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -38,7 +38,7 @@ const routesCrm = [
   {
     path: '/crm/planing',
     name: 'Planing',
-    component: () => import('../views/crm/Planing.vue'),
+    component: () => import('../views/Crm.Planing.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -47,7 +47,7 @@ const routesCrm = [
   {
     path: '/crm/profile',
     name: 'Profile',
-    component: () => import('../views/crm/Profile.vue'),
+    component: () => import('../views/Crm.Profile.vue'),
     meta: {
       layout: 'crm',
       auth: true
@@ -56,7 +56,7 @@ const routesCrm = [
   {
     path: '/crm/record',
     name: 'Record',
-    component: () => import('../views/crm/Record.vue'),
+    component: () => import('../views/Crm.Record.vue'),
     meta: {
       layout: 'crm',
       auth: true

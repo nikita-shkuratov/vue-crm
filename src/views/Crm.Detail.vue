@@ -20,7 +20,7 @@
             <div class="card-content white-text">
               <p>Category: {{ record.categoryName }}</p>
               <p>Description: {{ record.description }}</p>
-              <p>Amount: {{ record.amount }}</p>
+              <p>Amount: {{ record.amount }}&nbsp;RUB</p>
               <small>{{ filter(record.date) }}</small>
             </div>
           </div>
@@ -35,7 +35,7 @@
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
-import AppLoader from '../../components/ui/AppLoader.vue'
+import AppLoader from '../components/ui/AppLoader.vue'
 
 export default {
   components: { AppLoader },

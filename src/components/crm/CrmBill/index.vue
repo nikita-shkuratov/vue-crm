@@ -26,7 +26,7 @@ export default {
       const { bill } = this.$store.getters.getUser
       const rub = this.$store.getters.getСurrencies.rates.RUB
       const eur = this.$store.getters.getСurrencies.rates.EUR
-      return bill / (rub / eur)
+      return bill ? bill / (rub / eur) : ''
     }
   },
   methods: {

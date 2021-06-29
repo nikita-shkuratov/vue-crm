@@ -17,7 +17,7 @@ const routes = [
   {
     path: '/auth',
     name: 'Auth',
-    component: () => import('../views/Auth.vue'),
+    component: () => import('../views/Auth.Authorization.vue'),
     meta: {
       layout: 'auth',
       auth: false
@@ -26,7 +26,7 @@ const routes = [
   {
     path: '/registration',
     name: 'Registration',
-    component: () => import('../views/Registration.vue'),
+    component: () => import('../views/Auth.Registration.vue'),
     meta: {
       layout: 'auth',
       auth: false

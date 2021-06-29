@@ -49,7 +49,10 @@ export const useReg = () => {
       .required()
       .min(2)
   )
-  const { value: agree } = useField('agree', yup.boolean().required())
+  const { value: agree, errorMessage: agError } = useField(
+    'agree',
+    yup.boolean().required()
+  )
 
   const onSubmit = handleSubmit(async values => {
     try {
@@ -77,6 +80,7 @@ export const useReg = () => {
 
   return {
     agree,
+    agError,
     email,
     password,
     firstName,

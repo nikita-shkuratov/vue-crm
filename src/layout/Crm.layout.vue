@@ -1,7 +1,10 @@
 <template>
   <div class="app-main-layout">
     <the-crm-navbar @showSidebar="isOpen = !isOpen"></the-crm-navbar>
-    <app-breadcrumb :routeTitle="routeTitle" :currentPath="routePath"></app-breadcrumb>
+    <app-breadcrumb
+      :routeTitle="routeTitle"
+      :currentPath="routePath"
+    ></app-breadcrumb>
     <the-crm-side-bar
       :open="isOpen"
       @click-link="activeRoute"
@@ -21,10 +24,11 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import TheCrmNavbar from '../components/crm/TheCrmNavbar'
 import TheCrmSideBar from '../components/crm/TheCrmSideBar'
 import AppBreadcrumb from '../components/ui/AppBreadcrumb.vue'
+import { useStore } from 'vuex'
 
 export default {
   components: { TheCrmNavbar, TheCrmSideBar, AppBreadcrumb },
@@ -32,6 +36,13 @@ export default {
     const isOpen = ref(false)
     const routeTitle = ref('Bill')
     const routePath = ref('/crm')
+    const store = useStore()
+
+    onMounted(async () => {
+      /*   loading.value = true */
+      await store.dispatch('loadUser')
+      /*     loading.value = false */
+    })
 
     const activeRoute = (title, url) => {
       routeTitle.value = title

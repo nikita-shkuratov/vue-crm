@@ -22,12 +22,12 @@
 <script>
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import AppPage from '../../components/ui/AppPage'
-import AppModal from '../../components/ui/AppModal.vue'
-import RequestTable from '../../components/bank/request/RequestTable'
-import RequesModal from '../../components/bank/request/RequesModal'
-import AppLoader from '../../components/ui/AppLoader.vue'
-import RequestFilter from '../../components/bank/request/RequestFilter'
+import AppPage from '../components/ui/AppPage'
+import AppModal from '../components/ui/AppModal.vue'
+import RequestTable from '../components/bank/request/RequestTable'
+import RequesModal from '../components/bank/request/RequesModal'
+import AppLoader from '../components/ui/AppLoader.vue'
+import RequestFilter from '../components/bank/request/RequestFilter'
 
 export default {
   name: 'Bank',
@@ -47,7 +47,7 @@ export default {
 
     onMounted(async () => {
       loading.value = true
-      store.dispatch('request/load')
+      store.dispatch('request/fetchRequests')
       loading.value = false
     })
 
@@ -82,4 +82,5 @@ export default {
   font-weight: 400;
   cursor: pointer;
 }
+
 </style>
