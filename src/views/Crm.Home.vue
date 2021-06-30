@@ -2,12 +2,10 @@
   <div>
     <div class="page-title">
       <h3>Bill</h3>
-
       <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>
     </div>
-
     <app-loader v-if="loading" />
 
     <div v-else class="row">

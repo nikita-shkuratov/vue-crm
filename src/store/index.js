@@ -44,15 +44,37 @@ export default createStore({
     },
 
     async fetchCurrency ({ commit }) {
-      const key = 'c2b1b5b18e71531c830cbd725569fcc0'
       try {
         const { data } = await axios.get(
-          `https://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`
+          'https://www.nbrb.by/api/exrates/rates?periodicity=0'
         )
-        commit('setСurrencies', data)
-        return data
+        const usd = data.find(c => c.Cur_Abbreviation === 'USD')
+        const eur = data.find(c => c.Cur_Abbreviation === 'EUR')
+        const byn = 1
+        const curData = {
+          base: 'RUB',
+          date: usd.Date,
+          rates: {
+            USD: usd.Cur_OfficialRate,
+            EUR: eur.Cur_OfficialRate,
+            BYN: byn
+          }
+        }
+        commit('setСurrencies', curData)
+        return curData
       } catch (e) {
         console.log(e)
+        const mocData = {
+          base: 'RUB',
+          date: Date(),
+          rates: {
+            USD: 0,
+            EUR: 0,
+            BYN: 1
+          }
+        }
+        commit('setСurrencies', mocData)
+        return mocData
       }
     },
 
@@ -60,11 +82,12 @@ export default createStore({
       const user = state.user
       const token = rootState.auth.token
       try {
-        const {
-          data
-        } = await axios.patch(`/users/${user.id}.json?auth=${token}`, {
-          bill: payload
-        })
+        const { data } = await axios.patch(
+          `/users/${user.id}.json?auth=${token}`,
+          {
+            bill: payload
+          }
+        )
         commit('setUser', { ...user, ...data })
       } catch (e) {
         console.log(e)

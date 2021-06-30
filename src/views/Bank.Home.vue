@@ -82,5 +82,4 @@ export default {
   font-weight: 400;
   cursor: pointer;
 }
-
 </style>

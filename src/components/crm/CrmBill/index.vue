@@ -3,10 +3,9 @@
     <div class="card light-blue bill-card">
       <div class="card-content white-text">
         <span class="card-title">Currency account</span>
-
         <p v-for="cur of currencies" :key="cur" class="currency-line">
           <span>
-            {{ currencyFilter(getCurrency(cur), cur) }}
+            {{ `${getCurrency(cur)} ${cur}` }}
           </span>
         </p>
       </div>
@@ -18,26 +17,18 @@
 export default {
   props: ['rates'],
   data: () => ({
-    currencies: ['RUB', 'USD', 'EUR']
+    currencies: ['BYN', 'USD', 'EUR']
   }),
 
   computed: {
     base () {
       const { bill } = this.$store.getters.getUser
-      const rub = this.$store.getters.getСurrencies.rates.RUB
-      const eur = this.$store.getters.getСurrencies.rates.EUR
-      return bill ? bill / (rub / eur) : ''
+      return bill
     }
   },
   methods: {
     getCurrency (currency) {
-      return Math.floor(this.base * this.rates[currency])
-    },
-    currencyFilter (value, currency = 'RUB') {
-      return new Intl.NumberFormat('ru-RU', {
-        style: 'currency',
-        currency
-      }).format(value)
+      return (this.base / this.rates[currency]).toFixed(2)
     }
   }
 }

@@ -11,7 +11,7 @@
         <h6>{{ user.email }}</h6>
       </div>
       <div>
-        <h5>Сurrent account status: {{ user.bill }} <small>RUB</small></h5>
+        <h5>Сurrent account status: {{ user.bill }} <small>BYN</small></h5>
         <h5>Number of categories created: {{ catCount }}</h5>
         <h5>Number of records created: {{ recCount }}</h5>
         <h5></h5>
@@ -37,8 +37,13 @@ export default {
 
     onMounted(async () => {
       user.value = await store.dispatch('loadUser')
-      catCount.value = Object.keys(user.value.categories).length
-      recCount.value = Object.keys(user.value.records).length
+      const checkUserHasCat = user.value.categories
+      const checkUserHasRec = user.value.records
+      console.log(user.value)
+      catCount.value =
+        checkUserHasCat ? Object.keys(user.value.categories)?.length : '0'
+      recCount.value =
+        checkUserHasRec ? Object.keys(user.value.records)?.length : '0'
       loading.value = false
     })
 
