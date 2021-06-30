@@ -64,6 +64,7 @@ export default {
         console.log(e)
       }
     },
+
     async fetchCategoryById (_, categoryId) {
       try {
         const { token, userId } = store.getters['auth/authorizationData']
@@ -75,6 +76,7 @@ export default {
         console.log(e)
       }
     },
+
     async updateCategory (_, payload) {
       try {
         const { token, userId } = store.getters['auth/authorizationData']
