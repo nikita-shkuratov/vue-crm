@@ -14,7 +14,6 @@
         <router-view />
       </div>
     </main>
-
     <div class="fixed-action-btn">
       <router-link class="btn-floating btn-large blue" to="/crm/record">
         <i class="large material-icons">add</i></router-link
@@ -25,8 +24,8 @@
 
 <script>
 import { onMounted, ref } from 'vue'
-import TheCrmNavbar from '../components/crm/TheCrmNavbar'
-import TheCrmSideBar from '../components/crm/TheCrmSideBar'
+import TheCrmNavbar from '../components/crm/TheCrmNavbar/TheCrmNavbar'
+import TheCrmSideBar from '../components/crm/TheCrmSideBar/TheCrmSideBar'
 import AppBreadcrumb from '../components/ui/AppBreadcrumb.vue'
 import { useStore } from 'vuex'
 

@@ -5,11 +5,9 @@
 </template>
 
 <script>
-
-export default {
-
-}
+export default {}
 </script>
+
 <style lang="scss">
 .auth_wrapper {
   width: 100vw;

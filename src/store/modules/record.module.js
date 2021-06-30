@@ -60,6 +60,7 @@ export default {
         console.log(e)
       }
     },
+
     async fetchRecordById (_, recordId) {
       try {
         const { token, userId } = store.getters['auth/authorizationData']

@@ -16,10 +16,11 @@ export default {}
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  font-size: inherit;
 }
-@media(max-width:800px){
-  .wrapper{height: 100%;
-  width: 100%;}
+@media (max-width: 800px) {
+  .wrapper {
+    height: 100%;
+    width: 100%;
+  }
 }
 </style>

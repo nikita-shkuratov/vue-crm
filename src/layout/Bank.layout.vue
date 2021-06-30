@@ -9,9 +9,8 @@
 </template>
 
 <script>
-import TheNavBar from '../components/bank/TheBankNavbar'
-import TheSidebar from '../components/bank/TheBankSideBar'
-
+import TheNavBar from '../components/bank/TheBankNavbar/TheBankNavbar'
+import TheSidebar from '../components/bank/TheBankSideBar/TheBankSideBar'
 export default {
   components: { TheNavBar, TheSidebar }
 }
@@ -33,10 +32,10 @@ export default {
   height: 100vh;
   padding: 10px;
 }
-@media(max-width:500px){
- .container{width: 100%;
- padding: 5px 10px;
-}
-
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+    padding: 5px 10px;
+  }
 }
 </style>

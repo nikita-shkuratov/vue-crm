@@ -24,10 +24,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import AppPage from '../components/ui/AppPage'
 import AppModal from '../components/ui/AppModal.vue'
-import RequestTable from '../components/bank/request/RequestTable'
-import RequesModal from '../components/bank/request/RequesModal'
+import RequestTable from '../components/bank/Request/RequestTable'
+import RequesModal from '../components/bank/Request/RequesModal'
 import AppLoader from '../components/ui/AppLoader.vue'
-import RequestFilter from '../components/bank/request/RequestFilter'
+import RequestFilter from '../components/bank/Request/RequestFilter'
 
 export default {
   name: 'Bank',

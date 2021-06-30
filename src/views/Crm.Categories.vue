@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import CategoryCreate from '../components/crm/CategoryCreate'
-import CategoryEdit from '../components/crm/CategoryEdit'
+import CategoryCreate from '../components/crm/CategoryCreate/CategoryCreate'
+import CategoryEdit from '../components/crm/CategoryEdit/CategoryEdit'
 import { ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import AppLoader from '../components/ui/AppLoader.vue'
