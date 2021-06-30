@@ -20,7 +20,7 @@
             <div class="card-content white-text">
               <p>Category: {{ record.categoryName }}</p>
               <p>Description: {{ record.description }}</p>
-              <p>Amount: {{ record.amount }}&nbsp;RUB</p>
+              <p>Amount: {{ record.amount }}&nbsp;BYN</p>
               <small>{{ filter(record.date) }}</small>
             </div>
           </div>
@@ -53,7 +53,6 @@ export default {
         month: 'long',
         year: 'numeric'
       }
-      /*       const locale = store.getters.info.locale || 'ru-RU' */
       const locale = 'en-US'
       return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }

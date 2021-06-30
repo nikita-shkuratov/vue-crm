@@ -4,19 +4,16 @@
       <h3>Planning</h3>
       <h4>{{ myBill }}</h4>
     </div>
-
     <app-loader v-if="loading" />
-
     <p class="center" v-else-if="!categories.length">
       There are no categories yet.
       <router-link to="/crm/categories">Add a new category</router-link>
     </p>
-
     <section v-else>
       <div v-for="cat of categories" :key="cat.id">
         <p>
           <strong>{{ cat.title }}:</strong>
-          {{ currencyFilter(cat.spend) }} of {{ currencyFilter(cat.limit) }}
+          {{ `${cat.spend} BYN` }} of {{ `${cat.limit} BYN` }}
         </p>
         <div class="progress" v-tooltip="cat.tooltip">
           <div
@@ -46,13 +43,6 @@ export default {
     const categories = ref([])
     const myBill = ref(null)
 
-    const currencyFilter = (value, currency = 'RUB') => {
-      return new Intl.NumberFormat('ru-RU', {
-        style: 'currency',
-        currency
-      }).format(value)
-    }
-
     onMounted(async () => {
       myBill.value = store.getters.getMyBill
 
@@ -75,8 +65,10 @@ export default {
 
         const tooltipValue = cat.limit - spend
         const tooltip = `${
-          tooltipValue < 0 ? 'Excess by' : 'Remains'
-        } ${currencyFilter(Math.abs(tooltipValue))}`
+          tooltipValue < 0
+            ? `Excess by ${tooltipValue} BYN`
+            : `${tooltipValue} BYN Remains`
+        } `
 
         return {
           ...cat,
@@ -94,8 +86,7 @@ export default {
     return {
       loading,
       categories,
-      myBill,
-      currencyFilter
+      myBill
     }
   }
 }

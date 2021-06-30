@@ -30,7 +30,7 @@
 export default {
   props: ['rates', 'date'],
   data: () => ({
-    currencies: ['RUB', 'USD', 'EUR']
+    currencies: ['BYN', 'USD', 'EUR']
   }),
   methods: {
     filter (value) {
@@ -39,7 +39,6 @@ export default {
         month: 'long',
         year: 'numeric'
       }
-      /*       const locale = store.getters.info.locale || 'ru-RU' */
       const locale = 'en-US'
       return new Intl.DateTimeFormat(locale, options).format(new Date(value))
     }
